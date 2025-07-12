@@ -1,0 +1,12 @@
+[data-bs-theme="dark"] .table-dark {
+    --bs-table-bg: #090909 !important;
+    --bs-table-color: var(--bs-body-color) !important;
+}
+
+.navbar[data-bs-theme="dark"]  {
+    --bs-dark-rgb: 9, 9, 9;
+}
+
+.accordion-button:not(.collapsed) {
+    color: inherit;
+}
