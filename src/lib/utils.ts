@@ -11,7 +11,7 @@ export function formatProvider(provider: Provider): string {
     }
 }
 
-export function isValidURL(value: string | null, ...protocols: string[] ): boolean {
+export function isValidURL(value: string | null, ...protocols: string[]): boolean {
     if (value == null) {
         return false;
     }
