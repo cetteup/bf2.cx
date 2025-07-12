@@ -29,7 +29,7 @@ export const entries: Entry[] = [
     },
     {
         id: 'missing-join-server',
-        header: (<>Why do some servers not have a &quot;Join server&quot; option?</>),
+        header: 'Why do some servers not have a "Join server" option?',
         body: (
             <>
                 <p>
@@ -55,7 +55,7 @@ export const entries: Entry[] = [
     },
     {
         id: 'adding-server-links',
-        header: (<>How can I add a website/Discord/TeamSpeak link for my server?</>),
+        header: 'How can I add a website/Discord/TeamSpeak link for my server?',
         body: (
             <>
                 <p>
@@ -73,6 +73,30 @@ export const entries: Entry[] = [
                     For <code>teamspeak</code>, using a <code>ts3server://</code> or <code>teamspeak://</code> URL
                     allows players to join the server directly.
                 </p>
+            </>
+        ),
+    },
+    {
+        id: 'greyed-out-provider-icons',
+        header: 'Why is the BF2Hub/PlayBF2/OpenSpy logo greyed out for some servers?',
+        body: (
+            <>
+                <p>
+                    The &quot;provider&rdquo; icon is greyed out if a server does not actively report which provider it
+                    is using. We do our best to determine the most likely provider for such servers. This, however,
+                    involves additional effort and isn&lsquo;t error-free - which is why the logo is greyed out.
+                </p>
+                <p>
+                    Server admins should ensure their servers actively report their provider using
+                    a <code>provider</code> <a
+                    href={'https://sponsortext.cetteup.com/'} target={'_blank'}>sponsortext</a> variable.
+                    The following values are supported for the variable:
+                </p>
+                <ul>
+                    <li><code>bf2hub.com</code> / <code>bf2hub</code></li>
+                    <li><code>playbf2.ru</code> / <code>playbf2</code></li>
+                    <li><code>openspy.net</code> / <code>openspy</code></li>
+                </ul>
             </>
         ),
     },
