@@ -16,7 +16,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 <span className={'me-2'}>
                 {server.ranked ? (
                     <Image
-                        src={'https://bf2.tv/_content/BF2TV.Frontend/img/ranked.png'}
+                        src={'/ranked.png'}
                         width={16}
                         height={16}
                         alt={'Ranked'}
@@ -24,7 +24,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                     />
                 ) : (
                     <Image
-                        src={'https://bf2.tv/_content/BF2TV.Frontend/img/unranked.png'}
+                        src={'/unranked.png'}
                         width={16}
                         height={16}
                         alt={'Unranked'}
