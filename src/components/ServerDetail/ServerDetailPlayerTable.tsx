@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Table } from 'react-bootstrap';
+import { formatPlayerName } from '@/lib/utils';
 
 type ServerDetailPlayerTableProps = {
     team: Team
@@ -30,8 +31,12 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                 {players.map((p, i) => (
                     <tr key={i} className={'align-middle'}>
                         <td align={'right'}>{i + 1}</td>
-                        <td><a href={`https://playerpath.link/p/${p.pid}`}
-                               className={'text-white text-decoration-none'}>{p.name}</a></td>
+                        <td>
+                            <a href={`https://playerpath.link/p/${p.pid}`}
+                               className={'text-white text-decoration-none'}>
+                                {formatPlayerName(p)}
+                            </a>
+                        </td>
                         <td align={'right'}>{p.score}</td>
                         <td align={'right'}>{p.kills}</td>
                         <td align={'right'}>{p.score}</td>

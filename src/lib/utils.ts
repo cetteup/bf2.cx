@@ -11,6 +11,14 @@ export function formatProvider(provider: Provider): string {
     }
 }
 
+export function formatPlayerName(player: Player): string {
+    if (player.tag == '') {
+        return player.name;
+    }
+
+    return player.tag + ' ' + player.name;
+}
+
 export function isValidURL(value: string | null, ...protocols: string[]): boolean {
     if (value == null) {
         return false;
