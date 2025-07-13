@@ -11,9 +11,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang={'en'}>
         <body>
-        <div className={'bg-dark text-white min-vh-100'} data-bs-theme={'dark'}>
+        <div className={'bg-dark text-white min-vh-100 d-flex flex-column'} data-bs-theme={'dark'}>
             <Header/>
-            <main>
+            <main className={'flex-grow-1'}>
                 <Container className={'p-2'}>
                     <Providers>
                         {children}
