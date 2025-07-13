@@ -106,6 +106,16 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                         </a>
                     </span>
                 )}
+                {isValidURL(server.demoIndex, 'http:', 'https:') && (
+                    <span className={'me-1'}>
+                        <a href={server.demoIndex}>
+                            <i
+                                className={'bi-film text-white'}
+                                title={'Browse demo index'}
+                            />
+                        </a>
+                    </span>
+                )}
                 {isValidURL(server.variables['website'], 'http:', 'https:') && (
                     <span className={'me-1'}>
                         <a href={server.variables['website']}>

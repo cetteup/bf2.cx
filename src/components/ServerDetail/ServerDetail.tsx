@@ -67,6 +67,16 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                                 </a>
                             </Col>
                         )}
+                        {isValidURL(server.demoIndex, 'http:', 'https:') && (
+                            <Col xs={'auto'}>
+                                <a href={server.demoIndex}>
+                                    <i
+                                        className={'bi-film text-white'}
+                                        title={'Browse demo index'}
+                                    />
+                                </a>
+                            </Col>
+                        )}
                         {isValidURL(server.variables['website'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
                                 <a href={server.variables['website']}>

@@ -13,6 +13,7 @@ export type Server = {
     gameVariant: string
     ranked: boolean
     battlerecorder: boolean
+    demoIndex: string
     voip: boolean
     variables: Record<string, string>
     noVehicles: boolean
