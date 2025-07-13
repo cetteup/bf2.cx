@@ -39,7 +39,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                         </td>
                         <td align={'right'}>{p.score}</td>
                         <td align={'right'}>{p.kills}</td>
-                        <td align={'right'}>{p.score}</td>
+                        <td align={'right'}>{p.deaths}</td>
                         <td align={'right'}>{p.ping}ms</td>
                     </tr>
                 ))}
