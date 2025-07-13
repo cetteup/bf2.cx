@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Container } from 'react-bootstrap';
 import Providers from '@/app/providers';
+import Script from 'next/script';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </main>
             <Footer/>
         </div>
+        <Script strategy={'afterInteractive'} data-website-id={'df68c4c9-e6c1-4bb8-848f-503ef2306f22'} src={'https://analytics.cetteup.com/script.js'} />
         </body>
         </html>
     );
