@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { Server } from '@/lib/types';
+import Link from 'next/link';
 
 type ServerListEntryProps = {
     server: Server
@@ -87,7 +88,11 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                     </span>
                 )}
             </td>
-            <td className={'align-middle'}>{server.name}</td>
+            <td className={'align-middle'}>
+                <Link href={`/server/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>
+                    {server.name}
+                </Link>
+            </td>
             <td align={'right'}>{server.players.filter(isHumanPlayer).length} / {server.maxPlayers}</td>
             <td>{server.mapName} ({server.mapSize})</td>
             <td>

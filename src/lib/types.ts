@@ -15,15 +15,26 @@ export type Server = {
     battlerecorder: boolean
     voip: boolean
     variables: Record<string, string>
+    noVehicles: boolean
     joinLink: string | null
+    teams: Team[]
     players: Player[]
 }
 
+export type Team = {
+    index: number
+    label: string
+}
+
 export type Player = {
+    pid: number
     name: string
+    tag: string
     score: number
     kills: number
     deaths: number
     ping: number
+    team: number
+    teamLabel: string
     aibot: boolean
 }

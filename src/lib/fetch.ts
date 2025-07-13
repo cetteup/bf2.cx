@@ -38,3 +38,13 @@ export const fetchServers = async (): Promise<Server[]> => {
 
     return servers;
 };
+
+export const fetchServer = async (ip: string, port: string): Promise<Server> => {
+    const url = new URL(
+        `/v2/bf2/servers/${ip}:${port}`,
+        'https://api.bflist.io',
+    );
+
+    const resp = await fetch(url);
+    return await resp.json();
+};
