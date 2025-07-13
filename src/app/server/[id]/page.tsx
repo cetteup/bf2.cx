@@ -4,6 +4,8 @@ import { ServerDetail } from '@/components/ServerDetail/ServerDetail';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
+export const runtime = 'edge';
+
 type Props = {
     params: Promise<{ id: string }>
 }
