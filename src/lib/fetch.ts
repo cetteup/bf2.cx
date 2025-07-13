@@ -17,8 +17,6 @@ export const fetchServers = async (): Promise<Server[]> => {
             url.searchParams.set('after', after);
         }
 
-        console.log('Fetching', url.toString());
-
         const resp = await fetch(url);
         const data = await resp.json() as {
             servers: Server[]
