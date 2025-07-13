@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     return {
         title: `${server.name} - BF2.CX`,
+        description: `See live details for ${server.name}: current map, player list with score, kills, and deaths. Get the IP, join the server, and access its website and Discord.`
     };
 }
 
