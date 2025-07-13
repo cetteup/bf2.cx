@@ -5,8 +5,8 @@ export const Footer: FC = () => {
     return (
         <footer className={'py-2 text-center'}>
             <p>
-                <i>Heavily</i> inspired by <a href={'https://cod.pm/'} target={'_blank'}>cod.pm</a> and <a
-                href={'https://bf2.tv/'} target={'_blank'}>bf2.tv</a>.
+                <i>Heavily</i> inspired by <a href={'https://cod.pm/'}>cod.pm</a> and <a
+                href={'https://bf2.tv/'}>bf2.tv</a>.
             </p>
             <div className={'py-2 fs-4'}>
                 <IconLink

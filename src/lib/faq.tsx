@@ -15,13 +15,13 @@ export const entries: Entry[] = [
             <>
                 <p>
                     To join servers directly from your browser, you need to have the <a
-                    href={'https://joinme.click/download'} target={'_blank'}>joinme.click launcher</a> installed.
+                    href={'https://joinme.click/download'}>joinme.click launcher</a> installed.
                     With the launcher installed, the game should launch and automatically join the selected server
                     when you click <i className={'bi-play-circle'}/>.
                 </p>
                 <p>
                     If you still cannot join servers after installing the launcher, please hop into the <a
-                    href={'https://discord.gg/66u9udBF57'} target={'_blank'}>joinme.click Discord server</a> and
+                    href={'https://discord.gg/66u9udBF57'}>joinme.click Discord server</a> and
                     describe your issue.
                 </p>
             </>
@@ -34,7 +34,7 @@ export const entries: Entry[] = [
             <>
                 <p>
                     Not all servers are supported by the <a
-                    href={'https://joinme.click/download'} target={'_blank'}>joinme.click launcher</a>, which powers
+                    href={'https://joinme.click/download'}>joinme.click launcher</a>, which powers
                     the &quot;Join server&quot; option.
                     If a server is not supported by the launcher, we don&lsquo;t show the <i
                     className={'bi-play-circle'}/> option.
@@ -59,7 +59,7 @@ export const entries: Entry[] = [
         body: (
             <>
                 <p>
-                    By adding <a href={'https://sponsortext.cetteup.com/'} target={'_blank'}>sponsortext</a> variables
+                    By adding <a href={'https://sponsortext.cetteup.com/'}>sponsortext</a> variables
                     to your server.
                     The following variables are supported:
                 </p>
@@ -89,7 +89,7 @@ export const entries: Entry[] = [
                 <p>
                     Server admins should ensure their servers actively report their provider using
                     a <code>provider</code> <a
-                    href={'https://sponsortext.cetteup.com/'} target={'_blank'}>sponsortext</a> variable.
+                    href={'https://sponsortext.cetteup.com/'}>sponsortext</a> variable.
                     The following values are supported for the variable:
                 </p>
                 <ul>

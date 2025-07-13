@@ -30,7 +30,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                 {players.map((p, i) => (
                     <tr key={i} className={'align-middle'}>
                         <td align={'right'}>{i + 1}</td>
-                        <td><a href={`https://playerpath.link/p/${p.pid}`} target={'_blank'}
+                        <td><a href={`https://playerpath.link/p/${p.pid}`}
                                className={'text-white text-decoration-none'}>{p.name}</a></td>
                         <td align={'right'}>{p.score}</td>
                         <td align={'right'}>{p.kills}</td>
