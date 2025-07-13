@@ -71,7 +71,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                         }
                         {server.joinLink && (
                             <Col xs={'auto'}>
-                                <a href={server.joinLink}>
+                                <a href={server.joinLink} data-umami-event={'join-server'}>
                                     <i
                                         className={'bi-play-circle text-white'}
                                         title={'Join server'}
@@ -81,7 +81,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                         )}
                         {isValidURL(server.demoIndex, 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.demoIndex}>
+                                <a href={server.demoIndex} data-umami-event={'browse-demos'}>
                                     <i
                                         className={'bi-film text-white'}
                                         title={'Browse demo index'}
@@ -91,7 +91,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                         )}
                         {isValidURL(server.variables['website'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.variables['website']}>
+                                <a href={server.variables['website']} data-umami-event={'visit-website'}>
                                     <i
                                         className={'bi-link-45deg text-white'}
                                         title={'Visit website'}
@@ -101,7 +101,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                         )}
                         {isValidURL(server.variables['discord'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.variables['discord']} className={'align-middle'}>
+                                <a href={server.variables['discord']} data-umami-event={'join-discord'}>
                                     <i
                                         className={'bi-discord text-white'}
                                         title={'Join Discord'}

@@ -98,7 +98,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
             <td>
                 {server.joinLink && (
                     <span className={'me-1'}>
-                        <a href={server.joinLink}>
+                        <a href={server.joinLink} data-umami-event={'join-server'}>
                             <i
                                 className={'bi-play-circle text-white'}
                                 title={'Join server'}
@@ -108,7 +108,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
                 {isValidURL(server.demoIndex, 'http:', 'https:') && (
                     <span className={'me-1'}>
-                        <a href={server.demoIndex}>
+                        <a href={server.demoIndex} data-umami-event={'browse-demos'}>
                             <i
                                 className={'bi-film text-white'}
                                 title={'Browse demo index'}
@@ -118,7 +118,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
                 {isValidURL(server.variables['website'], 'http:', 'https:') && (
                     <span className={'me-1'}>
-                        <a href={server.variables['website']}>
+                        <a href={server.variables['website']} data-umami-event={'visit-website'}>
                             <i
                                 className={'bi-link-45deg text-white'}
                                 title={'Visit website'}
@@ -128,7 +128,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
                 {isValidURL(server.variables['discord'], 'http:', 'https:') && (
                     <span className={'me-1'}>
-                        <a href={server.variables['discord']}>
+                        <a href={server.variables['discord']} data-umami-event={'join-discord'}>
                             <i
                                 className={'bi-discord text-white'}
                                 title={'Join Discord'}
@@ -138,7 +138,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
                 {isValidURL(server.variables['teamspeak'], 'http:', 'https:', 'ts3server:', 'teamspeak:') && (
                     <span className={'me-1'}>
-                        <a href={server.variables['teamspeak']}>
+                        <a href={server.variables['teamspeak']} data-umami-event={'join-teamspeak'}>
                             <Image
                                 src={'/teamspeak.png'}
                                 width={16}
