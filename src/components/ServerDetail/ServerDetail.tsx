@@ -32,7 +32,15 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
     return (
         <>
             <Container>
-                <h1 className={'display-5 text-truncate'}>{server.name}</h1>
+                <h1 className={'display-5 text-truncate'}>
+                    {server.password &&
+                        <i
+                            className={'bi-lock fs-1 me-2 text-white-50 align-baseline'}
+                            title={'Password protected'}
+                        />
+                    }
+                    {server.name}
+                </h1>
                 <h3>
                     <Row className={'align-items-center align-content-center gx-3 gy-3'}>
                         {provider == 'bf2hub.com' &&
