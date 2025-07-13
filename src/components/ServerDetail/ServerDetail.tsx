@@ -109,6 +109,24 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                                 </a>
                             </Col>
                         )}
+                        {isValidURL(server.variables['teamspeak'], 'http:', 'https:', 'ts3server:', 'teamspeak:') && (
+                            <Col xs={'auto'}>
+                                <a href={server.variables['teamspeak']} data-umami-event={'join-teamspeak'}>
+                                    <Image
+                                        src={'/teamspeak.png'}
+                                        width={28}
+                                        height={28}
+                                        style={{
+                                            width: '1.75rem',
+                                            height: '1.75rem',
+                                            verticalAlign: '-0.225rem',
+                                        }}
+                                        alt={'TeamSpeak'}
+                                        title={'Join TeamSpeak'}
+                                    />
+                                </a>
+                            </Col>
+                        )}
                         <Col xs={'auto'}>
                             <Badge bg={'primary'}>
                                 <i className={'bi-server'}/> {server.ip}:{server.port}
