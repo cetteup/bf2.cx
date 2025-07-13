@@ -89,7 +89,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
             </td>
             <td className={'align-middle'}>
-                <Link href={`/server/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>
+                <Link href={`/servers/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>
                     {server.name}
                 </Link>
             </td>
