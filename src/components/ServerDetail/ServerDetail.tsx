@@ -7,6 +7,7 @@ import { Badge, Col, Container, Row } from 'react-bootstrap';
 import { ServerDetailPlayerTable } from '@/components/ServerDetail/ServerDetailPlayerTable';
 import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
+import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 
 type ServerDetailProps = {
     ip: string
@@ -110,13 +111,22 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
                                 <i className={'bi-map'}/> {server.mapName} ({server.mapSize})
                             </Badge>
                         </Col>
-                        {server.noVehicles &&
-                            <Col xs={'auto'}>
-                                <Badge bg={'secondary'}>No vehicles</Badge>
-                            </Col>
-                        }
                     </Row>
                 </h3>
+            </Container>
+
+            <Container>
+                {/*<FormCheck type={'switch'} label={'Battlerecorder'} readOnly checked={server.battlerecorder}/>*/}
+                <h5>
+                    <Row className={'gx-3'}>
+                        <Col xs={'auto'}><SettingToggle enabled={server.ranked} label={'Ranked'}/></Col>
+                        <Col xs={'auto'}><SettingToggle enabled={!server.noVehicles} label={'Vehicles'}/></Col>
+                        <Col xs={'auto'}><SettingToggle enabled={server.battlerecorder} label={'Battlerecorder'}/></Col>
+                        <Col xs={'auto'}><SettingToggle enabled={server.voip} label={'VOIP'}/></Col>
+                        <Col xs={'auto'}><SettingToggle enabled={server.friendlyfire} label={'Friendly fire'}/></Col>
+                        <Col xs={'auto'}><SettingToggle enabled={server.autobalance} label={'Autobalance'}/></Col>
+                    </Row>
+                </h5>
             </Container>
 
             <Container className={'mt-3'}>

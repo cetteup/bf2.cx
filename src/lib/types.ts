@@ -15,6 +15,8 @@ export type Server = {
     battlerecorder: boolean
     demoIndex: string
     voip: boolean
+    autobalance: boolean
+    friendlyfire: boolean
     variables: Record<string, string>
     noVehicles: boolean
     joinLink: string | null
