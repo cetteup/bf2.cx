@@ -1,11 +1,11 @@
 'use client';
 
-import { Container, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { Container, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavLink } from 'react-bootstrap';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Header() {
-    const activeSegment = useSelectedLayoutSegment();
+    const path = usePathname()
 
     return (
         <header>
@@ -15,8 +15,8 @@ export default function Header() {
                     <NavbarToggle aria-controls={'basic-navbar-nav'}/>
                     <NavbarCollapse>
                         <Nav className={'me-auto'}>
-                            <Link href={'/'} className={'nav-link ' + (activeSegment == null ? 'active' : '')}>Serverlist</Link>
-                            <Link href={'/faq'} className={'nav-link ' + (activeSegment == 'faq' ? 'active' : '')}>FAQ</Link>
+                            <NavLink as={Link} href={'/'} active={path == '/'}>Serverlist</NavLink>
+                            <NavLink as={Link} href={'/faq'} active={path == '/faq'}>FAQ</NavLink>
                         </Nav>
                     </NavbarCollapse>
                 </Container>
