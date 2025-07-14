@@ -4,6 +4,9 @@ import { fetchServers } from '@/lib/fetch';
 import { ServerList } from '@/components/ServerList/ServerList';
 import type { Metadata } from 'next';
 
+// Disable ISR (server list is too dynamic to cache at build time and revalidate)
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
     title: 'BF2.CX - Browse Battlefield 2 servers',
     description: 'Discover active Battlefield 2 servers with real player counts - no fake bots. Join games directly, and access each server’s website, Discord, and TeamSpeak links instantly.',
