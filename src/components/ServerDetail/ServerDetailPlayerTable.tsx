@@ -30,7 +30,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                 </tr>
                 </thead>
                 <tbody>
-                {isLoading && [ ...Array(10).keys() ].map((i) => (
+                {isLoading && [ ...Array(20).keys() ].map((i) => (
                     <tr key={i}>
                         {[ ...Array(6).keys() ].map((j) => (
                             <td key={j}>

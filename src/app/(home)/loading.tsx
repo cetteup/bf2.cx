@@ -20,7 +20,7 @@ export default function Loading() {
             <p aria-hidden={true}>
                 <Placeholder xs={6}/>
             </p>
-            <ServerListTable placeholders={10}/>
+            <ServerListTable placeholders={32}/>
         </>
     );
 }
