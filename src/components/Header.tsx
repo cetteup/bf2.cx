@@ -28,7 +28,7 @@ export default function Header() {
                             width={24}
                             height={24}
                             quality={100}
-                            className={'d-inline-block align-text-top'}
+                            className={'d-inline-block align-text-bottom'}
                             alt={'BF2.CX'}
                         /> BF2.CX
                     </NavbarBrand>
