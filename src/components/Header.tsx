@@ -1,8 +1,19 @@
 'use client';
 
-import { Container, Nav, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle, NavLink } from 'react-bootstrap';
+import {
+    Container,
+    Nav,
+    Navbar,
+    NavbarBrand,
+    NavbarCollapse,
+    NavbarText,
+    NavbarToggle,
+    NavLink,
+} from 'react-bootstrap';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { IconLink } from '@/components/IconLink';
+import Image from 'next/image';
 
 export default function Header() {
     const path = usePathname()
@@ -11,7 +22,16 @@ export default function Header() {
         <header>
             <Navbar bg={'dark'} data-bs-theme={'dark'}>
                 <Container>
-                    <NavbarBrand as={Link} href={'/'}>BF2.CX</NavbarBrand>
+                    <NavbarBrand as={Link} href={'/'}>
+                        <Image
+                            src={'/bf2.cx.png'}
+                            width={24}
+                            height={24}
+                            quality={100}
+                            className={'d-inline-block align-text-top'}
+                            alt={'BF2.CX'}
+                        /> BF2.CX
+                    </NavbarBrand>
                     <NavbarToggle aria-controls={'basic-navbar-nav'}/>
                     <NavbarCollapse>
                         <Nav className={'me-auto'}>
@@ -19,6 +39,9 @@ export default function Header() {
                             <NavLink as={Link} href={'/faq'} active={path == '/faq'}>FAQ</NavLink>
                         </Nav>
                     </NavbarCollapse>
+                    <NavbarText>
+                        <IconLink icon={'bi-github'} href={'https://github.com/cetteup/bf2.cx'} title={'GitHub'}/>
+                    </NavbarText>
                 </Container>
             </Navbar>
         </header>
