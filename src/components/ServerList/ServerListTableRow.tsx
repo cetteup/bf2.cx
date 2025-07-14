@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { Server } from '@/lib/types';
-import Link from 'next/link';
+import { HoverPrefetchLink } from '@/components/HoverPrefetchLink';
 
 type ServerListEntryProps = {
     server: Server
@@ -89,9 +89,9 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
             </td>
             <td className={'align-middle'}>
-                <Link href={`/servers/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>
+                <HoverPrefetchLink href={`/servers/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>
                     {server.name}
-                </Link>
+                </HoverPrefetchLink>
             </td>
             <td align={'right'}>{server.players.filter(isHumanPlayer).length} / {server.maxPlayers}</td>
             <td>{server.mapName} ({server.mapSize})</td>
