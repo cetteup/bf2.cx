@@ -1,7 +1,5 @@
-import { getQueryClient } from '@/lib/query';
-import { fetchServers } from '@/lib/fetch';
+import { fetchServer } from '@/lib/fetch';
 import { ServerDetail } from '@/components/ServerDetail/ServerDetail';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Metadata } from 'next';
 
 export const runtime = 'edge';
@@ -14,13 +12,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
     const [ ip, port ] = decodeURIComponent(id).split(':');
 
-    const servers = await fetchServers();
-    // TODO handle not found
-    const server = servers.find((s) => s.ip == ip && s.port.toString() == port)!;
+    const server = await fetchServer(ip, port);
 
     return {
         title: `${server.name} - BF2.CX`,
-        description: `See live details for ${server.name}: current map, player list with score, kills, and deaths. Get the IP, join the server, and access its website and Discord.`
+        description: `See live details for ${server.name}: current map, player list with score, kills, and deaths. Get the IP, join the server, and access its website and Discord.`,
     };
 }
 
@@ -28,19 +24,13 @@ export default async function ServerPage({ params }: Props) {
     const { id } = await params;
     const [ ip, port ] = decodeURIComponent(id).split(':');
 
-    const queryClient = getQueryClient();
-
-    void queryClient.prefetchQuery({
-        queryKey: [ 'servers' ],
-        queryFn: fetchServers,
-        retry: 2,
-    });
+    // Need to fetch the server for the metadata anyway,
+    // so we might as well use the data to initially populate the page
+    const server = await fetchServer(ip, port);
 
     return (
         <>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-                <ServerDetail ip={ip} port={port}/>
-            </HydrationBoundary>
+            <ServerDetail initial={server}/>
         </>
     );
 }

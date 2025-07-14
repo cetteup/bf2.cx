@@ -2,32 +2,30 @@
 
 import { FC } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { fetchServers } from '@/lib/fetch';
+import { fetchServer } from '@/lib/fetch';
 import { Badge, Col, Container, Row } from 'react-bootstrap';
 import { ServerDetailPlayerTable } from '@/components/ServerDetail/ServerDetailPlayerTable';
 import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
+import { Server } from '@/lib/types';
 
 type ServerDetailProps = {
-    ip: string
-    port: string
+    initial: Server
 }
 
-export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
-    const { data: servers } = useSuspenseQuery({
-        queryKey: [ 'servers' ],
-        queryFn: fetchServers,
+export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
+    const { ip, port } = initial;
+    const { data: server } = useSuspenseQuery({
+        queryKey: [ 'servers', ip, port ],
+        queryFn: () => fetchServer(ip, port.toString()),
+        initialData: initial,
         refetchInterval: 30000,
         refetchIntervalInBackground: false,
         refetchOnWindowFocus: true,
         refetchOnReconnect: true,
-        refetchOnMount: true,
         retry: 2,
     });
-
-    // TODO Handle not found
-    const server = servers.find((s) => s.ip == ip && s.port.toString() == port)!;
 
     const [ provider ] = determineProvider(server);
 
