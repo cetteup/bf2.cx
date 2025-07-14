@@ -11,10 +11,10 @@ export default function Header() {
         <header>
             <Navbar bg={'dark'} data-bs-theme={'dark'}>
                 <Container>
-                    <NavbarBrand href={'/'}>BF2.CX</NavbarBrand>
-                    <NavbarToggle aria-controls="basic-navbar-nav"/>
+                    <NavbarBrand as={Link} href={'/'}>BF2.CX</NavbarBrand>
+                    <NavbarToggle aria-controls={'basic-navbar-nav'}/>
                     <NavbarCollapse>
-                        <Nav className="me-auto">
+                        <Nav className={'me-auto'}>
                             <Link href={'/'} className={'nav-link ' + (activeSegment == null ? 'active' : '')}>Serverlist</Link>
                             <Link href={'/faq'} className={'nav-link ' + (activeSegment == 'faq' ? 'active' : '')}>FAQ</Link>
                         </Nav>
