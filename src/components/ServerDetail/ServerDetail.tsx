@@ -21,6 +21,8 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port }) => {
         refetchInterval: 30000,
         refetchIntervalInBackground: false,
         refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
         retry: 2,
     });
 

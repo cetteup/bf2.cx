@@ -16,6 +16,8 @@ export const ServerList: FC = () => {
         refetchInterval: 30000,
         refetchIntervalInBackground: false,
         refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
         retry: 2,
     });
 
