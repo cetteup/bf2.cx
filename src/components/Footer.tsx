@@ -3,7 +3,7 @@ import { IconLink } from '@/components/IconLink';
 
 export const Footer: FC = () => {
     return (
-        <footer className={'py-2 text-center'}>
+        <footer className={'pt-2 pb-4 text-center'}>
             <p>
                 <i>Heavily</i> inspired by <a href={'https://cod.pm/'}>cod.pm</a> and <a
                 href={'https://bf2.tv/'}>bf2.tv</a>.
