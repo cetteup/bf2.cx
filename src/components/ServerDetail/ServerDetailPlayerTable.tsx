@@ -1,19 +1,21 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
-import { Table } from 'react-bootstrap';
+import { Placeholder, Table } from 'react-bootstrap';
 import { formatPlayerName } from '@/lib/utils';
 
 type ServerDetailPlayerTableProps = {
-    team: Team
-    players: Player[]
+    team?: Team
+    players?: Player[]
+    isLoading?: boolean
 }
 
-export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team, players }) => {
+export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team, players, isLoading }) => {
     return (
         <>
             <div className={'pe-auto my-2'}>
                 <h3 className={'text-center bg-dark-subtle py-3'}>
-                    {team.label}
+                    {isLoading && <Placeholder xs={2} size={'lg'}></Placeholder>}
+                    {team && team.label}
                 </h3>
             </div>
             <Table variant={'dark'} hover responsive className={'align-middle'}>
@@ -28,7 +30,18 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                 </tr>
                 </thead>
                 <tbody>
-                {players.map((p, i) => (
+                {isLoading && [ ...Array(10).keys() ].map((i) => (
+                    <tr key={i}>
+                        {[ ...Array(6).keys() ].map((j) => (
+                            <td key={j}>
+                                <Placeholder as={'span'} animation={'glow'}>
+                                    <Placeholder xs={12}/>
+                                </Placeholder>
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+                {players && players.map((p, i) => (
                     <tr key={i} className={'align-middle'}>
                         <td align={'right'}>{i + 1}</td>
                         <td>
