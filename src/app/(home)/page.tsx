@@ -3,6 +3,7 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { fetchServers } from '@/lib/fetch';
 import { ServerList } from '@/components/ServerList/ServerList';
 import type { Metadata } from 'next';
+import { Alert } from 'react-bootstrap';
 
 // Disable ISR (server list is too dynamic to cache at build time and revalidate)
 export const runtime = 'edge';
@@ -24,11 +25,13 @@ export default async function Home() {
     return (
         <>
             <h1 className={'display-4'}>Browse Battlefield 2 servers</h1>
-            <div>
-                <HydrationBoundary state={dehydrate(queryClient)}>
-                    <ServerList/>
-                </HydrationBoundary>
-            </div>
+            <Alert variant={'info'} dismissible>
+                <i className={'bi-info-circle-fill me-2'}/>
+                The server list self-updates, no need to refresh the page or press any buttons!
+            </Alert>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <ServerList/>
+            </HydrationBoundary>
         </>
     );
 }

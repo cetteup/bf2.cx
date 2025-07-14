@@ -2,15 +2,16 @@
 
 import { FC } from 'react';
 import { isHumanPlayer } from '@/lib/utils';
-import { Table } from 'react-bootstrap';
+import { Placeholder, Table } from 'react-bootstrap';
 import { ServerListTableRow } from '@/components/ServerList/ServerListTableRow';
 import { Server } from '@/lib/types';
 
 type ServerListTableProps = {
-    servers: Server[]
+    servers?: Server[]
+    placeholders?: number
 }
 
-export const ServerListTable: FC<ServerListTableProps> = ({servers}) => {
+export const ServerListTable: FC<ServerListTableProps> = ({ servers, placeholders }) => {
     return (
         <Table variant={'dark'} size={'xl'} hover responsive className={'align-middle'}>
             <thead>
@@ -24,7 +25,18 @@ export const ServerListTable: FC<ServerListTableProps> = ({servers}) => {
             </tr>
             </thead>
             <tbody>
-            {servers.sort((a, b) => b.players.filter(isHumanPlayer).length - a.players.filter(isHumanPlayer).length).map((s) => {
+            {placeholders && [ ...Array(placeholders).keys() ].map((i) => (
+                <tr key={i}>
+                    {[ ...Array(6).keys() ].map((j) => (
+                        <td key={j}>
+                            <Placeholder as={'span'} animation={'glow'}>
+                                <Placeholder xs={12}/>
+                            </Placeholder>
+                        </td>
+                    ))}
+                </tr>
+            ))}
+            {servers && servers.sort((a, b) => b.players.filter(isHumanPlayer).length - a.players.filter(isHumanPlayer).length).map((s) => {
                 // TODO Tiebreaker sort
                 return (
                     <ServerListTableRow key={s.guid} server={s}/>
