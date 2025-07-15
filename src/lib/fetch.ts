@@ -37,9 +37,8 @@ export const fetchServers = async (): Promise<Server[]> => {
     return servers;
 };
 
-export const fetchServer = async (ip: string, port: string): Promise<Server> => {
+export const fetchServer = async (ip: string, port: string): Promise<Server | undefined> => {
     // Always fetch list and search within it to re-use cached API responses
     const servers = await fetchServers();
-    // TODO handle not found
-    return servers.find((s) => s.ip == ip && s.port.toString() == port)!;
+    return servers.find((s) => s.ip == ip && s.port.toString() == port);
 };

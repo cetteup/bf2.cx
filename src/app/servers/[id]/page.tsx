@@ -1,6 +1,7 @@
 import { fetchServer } from '@/lib/fetch';
 import { ServerDetail } from '@/components/ServerDetail/ServerDetail';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const runtime = 'edge';
 
@@ -13,6 +14,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const [ ip, port ] = decodeURIComponent(id).split(':');
 
     const server = await fetchServer(ip, port);
+
+    if (!server) {
+        return {
+            title: 'Server not found - BF2.CX',
+            description: 'See live details for any server: current map, player list with score, kills, and deaths. Get the IP, join the server, and access its website and Discord.',
+        };
+    }
 
     return {
         title: `${server.name} - BF2.CX`,
@@ -27,6 +35,10 @@ export default async function ServerPage({ params }: Props) {
     // Need to fetch the server for the metadata anyway,
     // so we might as well use the data to initially populate the page
     const server = await fetchServer(ip, port);
+
+    if (!server) {
+        notFound();
+    }
 
     return (
         <>

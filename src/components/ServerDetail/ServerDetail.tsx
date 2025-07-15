@@ -9,6 +9,7 @@ import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/
 import Image from 'next/image';
 import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 import { Server } from '@/lib/types';
+import { notFound } from 'next/navigation';
 
 type ServerDetailProps = {
     initial: Server
@@ -26,6 +27,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
         refetchOnReconnect: true,
         retry: 2,
     });
+
+    if (!server) {
+        notFound();
+    }
 
     const [ provider ] = determineProvider(server);
 
