@@ -55,7 +55,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                                 </a>
                                 {streamer && (
                                     <span className={'ms-1'}>
-                                    <a href={streamer.url}>
+                                    <a href={streamer.url} data-umami-event={'watch-stream'}>
                                         <i
                                             className={`bi-${streamer.platform} align-middle`}
                                             title={'Watch live-stream'}
