@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
 import { formatPlayerName } from '@/lib/utils';
+import { getActiveStreamerByPlayer } from '@/lib/streamers';
 
 type ServerDetailPlayerTableProps = {
     team?: Team
@@ -41,21 +42,35 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                         ))}
                     </tr>
                 ))}
-                {players && players.map((p, i) => (
-                    <tr key={i} className={'align-middle'}>
-                        <td align={'right'}>{i + 1}</td>
-                        <td>
-                            <a href={`https://playerpath.link/p/${p.pid}`}
-                               className={'text-white text-decoration-none'}>
-                                {formatPlayerName(p)}
-                            </a>
-                        </td>
-                        <td align={'right'}>{p.score}</td>
-                        <td align={'right'}>{p.kills}</td>
-                        <td align={'right'}>{p.deaths}</td>
-                        <td align={'right'}>{p.ping}ms</td>
-                    </tr>
-                ))}
+                {players && players.map((p, i) => {
+                    // Show a stream platform link if player is known streamer (and currently [likely to be] live)
+                    const streamer = getActiveStreamerByPlayer(p);
+                    return (
+                        <tr key={i} className={'align-middle'}>
+                            <td align={'right'}>{i + 1}</td>
+                            <td>
+                                <a href={`https://playerpath.link/p/${p.pid}`}
+                                   className={'text-white text-decoration-none'}>
+                                    {formatPlayerName(p)}
+                                </a>
+                                {streamer && (
+                                    <span className={'ms-1'}>
+                                    <a href={streamer.url}>
+                                        <i
+                                            className={`bi-${streamer.platform} align-middle`}
+                                            title={'Watch live-stream'}
+                                        />
+                                    </a>
+                                </span>
+                                )}
+                            </td>
+                            <td align={'right'}>{p.score}</td>
+                            <td align={'right'}>{p.kills}</td>
+                            <td align={'right'}>{p.deaths}</td>
+                            <td align={'right'}>{p.ping}ms</td>
+                        </tr>
+                    );
+                })}
                 </tbody>
             </Table>
         </>

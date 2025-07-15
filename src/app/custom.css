@@ -10,3 +10,11 @@
 .accordion-button:not(.collapsed) {
     color: inherit;
 }
+
+.bi-twitch {
+    color: #9146FF;
+}
+
+.bi-youtube {
+    color: #FF0000;
+}

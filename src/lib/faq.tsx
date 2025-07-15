@@ -100,4 +100,22 @@ export const entries: Entry[] = [
             </>
         ),
     },
+    {
+        id: 'live-stream-links',
+        header: 'I live-stream Battlefield 2. How can I get the site to show a link to my stream?',
+        body: (
+            <>
+                <p>Two things are required for us to show a link to your live-stream:</p>
+                <ol>
+                    <li>
+                        Your Battlefield 2 account and stream details need to be added to our list of known streamers.
+                    </li>
+                    <li>You need to put on a <code>STREAM</code> tag to indicate that you are live.</li>
+                </ol>
+                To get your details added, please either post in our <a
+                href={'https://discord.gg/fq7c46prEX'} rel={'noreferrer'}>Discord</a> or open pull request on <a
+                href={'https://github.com/cetteup/bf2.cx'} rel={'noreferrer'}>GitHub</a>.
+            </>
+        ),
+    },
 ];
