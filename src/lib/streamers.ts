@@ -3,7 +3,7 @@ import { Player } from '@/lib/types';
 type Streamer = {
     pid: number
     name: string
-    platform: string
+    platform: 'twitch' | 'youtube'
     url: string
 }
 
@@ -19,6 +19,12 @@ const streamers: Streamer[] = [
         name: 'twitch.tv/netskytv',
         platform: 'twitch',
         url: 'https://twitch.tv/netskytv',
+    },
+    {
+        pid: 500289434,
+        name: 'Tomix...',
+        platform: 'twitch',
+        url: 'https://www.twitch.tv/tomixbf2',
     },
 ];
 
