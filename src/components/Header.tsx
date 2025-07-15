@@ -40,6 +40,7 @@ export default function Header() {
                         </Nav>
                     </NavbarCollapse>
                     <NavbarText>
+                        <IconLink icon={'bi-discord'} href={'https://discord.gg/fq7c46prEX'} title={'Discord'}/>
                         <IconLink icon={'bi-github'} href={'https://github.com/cetteup/bf2.cx'} title={'GitHub'}/>
                     </NavbarText>
                 </Container>
