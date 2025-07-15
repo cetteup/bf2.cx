@@ -1,17 +1,23 @@
+'use client';
+
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap';
 import { entries } from '@/lib/faq';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'FAQ - BF2.CX',
-    description: 'Find answers to frequently asked questions around BF2.CX.',
-};
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { AccordionEventKey } from 'react-bootstrap/AccordionContext';
 
 export default function FAQ() {
+    const [ activeKey, setActiveKey ] = useState<AccordionEventKey>();
+    const params = useParams();
+
+    useEffect(() => {
+        setActiveKey(window.location.hash.slice(1));
+    }, [ params ]);
+
     return (
         <>
             <h1 className={'display-4'}>Frequently asked questions</h1>
-            <Accordion className={'mt-2'}>
+            <Accordion activeKey={activeKey} onSelect={setActiveKey} className={'mt-2'}>
                 {entries.map((entry, i) => (
                     <AccordionItem key={i} eventKey={entry.id}>
                         <AccordionHeader>
