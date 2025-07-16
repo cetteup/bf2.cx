@@ -3,7 +3,7 @@
     --bs-table-color: var(--bs-body-color) !important;
 }
 
-.navbar[data-bs-theme="dark"]  {
+.navbar[data-bs-theme="dark"] {
     --bs-dark-rgb: 9, 9, 9;
 }
 
@@ -17,4 +17,24 @@
 
 .bi-youtube {
     color: #FF0000;
+}
+
+.favorite {
+    cursor: pointer;
+    transition: color .3s;
+}
+
+.favorite:not(.favorite-active):hover {
+    color: #cd5c5c;
+    transition: color .3s;
+}
+
+.favorite-active {
+    color: #cd5c5c;
+    transition: color .3s;
+}
+
+.favorite-active:hover {
+    color: var(--bs-white);
+    transition: color .3s;
 }

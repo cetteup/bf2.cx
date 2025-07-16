@@ -5,6 +5,7 @@ import { isHumanPlayer } from '@/lib/utils';
 import { Placeholder, Table } from 'react-bootstrap';
 import { ServerListTableRow } from '@/components/ServerList/ServerListTableRow';
 import { Server } from '@/lib/types';
+import Link from 'next/link';
 
 type ServerListTableProps = {
     servers?: Server[]
@@ -42,6 +43,9 @@ export const ServerListTable: FC<ServerListTableProps> = ({ servers, placeholder
                     <ServerListTableRow key={s.guid} server={s}/>
                 );
             })}
+            <tr>
+                <td colSpan={6} className={'text-center'}>Only showing populated servers and favorites. <Link href={'/servers'} className={'btn btn-primary'}>Browse all servers</Link></td>
+            </tr>
             </tbody>
         </Table>
     );

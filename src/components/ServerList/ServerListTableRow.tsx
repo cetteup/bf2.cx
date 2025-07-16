@@ -3,12 +3,14 @@ import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/
 import Image from 'next/image';
 import { Server } from '@/lib/types';
 import { HoverPrefetchLink } from '@/components/HoverPrefetchLink';
+import { FavoriteServerToggle } from '@/components/FavoriteServerToggle';
 
 type ServerListEntryProps = {
     server: Server
 }
 
 export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
+
     const [ provider, explicit ] = determineProvider(server);
 
     return (
@@ -96,6 +98,9 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
             <td align={'right'}>{server.players.filter(isHumanPlayer).length} / {server.maxPlayers}</td>
             <td>{server.mapName} ({server.mapSize})</td>
             <td>
+                <span className={'me-1'}>
+                    <FavoriteServerToggle guid={server.guid}/>
+                </span>
                 {server.joinLink && (
                     <span className={'me-1'}>
                         <a href={server.joinLink} data-umami-event={'join-server'}>

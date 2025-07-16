@@ -35,7 +35,8 @@ export default function Header() {
                     <NavbarToggle aria-controls={'basic-navbar-nav'}/>
                     <NavbarCollapse>
                         <Nav className={'me-auto'}>
-                            <NavLink as={Link} href={'/'} active={path == '/'}>Serverlist</NavLink>
+                            <NavLink as={Link} href={'/'} active={path == '/'}>Home</NavLink>
+                            <NavLink as={Link} href={'/servers'} active={path == '/servers'}>Servers</NavLink>
                             <NavLink as={Link} href={'/faq'} active={path == '/faq'}>FAQ</NavLink>
                         </Nav>
                     </NavbarCollapse>

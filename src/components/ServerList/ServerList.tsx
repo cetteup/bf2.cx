@@ -5,10 +5,15 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchServers } from '@/lib/fetch';
 import { ServerListTable } from '@/components/ServerList/ServerListTable';
 import { isHumanPlayer } from '@/lib/utils';
+import { Server } from '@/lib/types';
 
 const nf = new Intl.NumberFormat('en-US');
 
-export const ServerList: FC = () => {
+type ServerListProps = {
+    filter?: (server: Server) => boolean
+}
+
+export const ServerList: FC<ServerListProps> = ({ filter }) => {
     const { data: servers } = useSuspenseQuery({
         queryKey: [ 'servers' ],
         queryFn: fetchServers,
@@ -34,7 +39,7 @@ export const ServerList: FC = () => {
                 {nf.format(humanPlayers)} players are playing online
                 across {populatedServers.length} servers.
             </p>
-            <ServerListTable servers={servers}/>
+            <ServerListTable servers={filter ? servers.filter(filter) : servers}/>
         </>
     );
 };
