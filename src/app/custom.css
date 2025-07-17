@@ -8,7 +8,7 @@
 }
 
 .offcanvas {
-    --bs-offcanvas-width: 450px;
+    --bs-offcanvas-width: 425px;
 }
 
 .accordion-button:not(.collapsed) {

@@ -7,10 +7,13 @@ import {
     CardBody,
     CardText,
     CardTitle,
+    Col,
+    Container,
     Offcanvas,
     OffcanvasBody,
     OffcanvasHeader,
     OffcanvasTitle,
+    Row,
 } from 'react-bootstrap';
 import { useBuddyList } from '@/lib/localstorage';
 import { BuddyToggle } from '@/components/BuddyToggle';
@@ -100,34 +103,43 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                                 {server.name}
                                             </Link>
                                         </p>
-                                        <div style={{ lineHeight: '1.1' }}>
-                                            {server.joinLink &&
-                                                <a
-                                                    href={server.joinLink}
-                                                    className={'me-1 fs-4 align-middle'}
-                                                    data-umami-event={'join-buddy'}
-                                                >
-                                                    <i
-                                                        className={'bi-play-circle text-white'}
-                                                        title={'Join server'}
-                                                    />
-                                                </a>
-                                            }
-                                            <Badge bg={'primary'} className={'me-1 fs-6'}>
-                                                <i
-                                                    className={'bi-activity'}
-                                                /> {server.players.filter(isHumanPlayer).length} / {server.maxPlayers}
-                                            </Badge>
-                                            <Badge bg={'success'} className={'fs-6'}>
-                                                <i
-                                                    className={'bi-map'}
-                                                /> <span
-                                                className={'text-truncate d-inline-block align-bottom'}
-                                                style={{ maxWidth: '180px' }}>
-                                                {server.mapName}
-                                                </span> ({server.mapSize})
-                                            </Badge>
-                                        </div>
+                                        <Container className={'p-0'}>
+                                            <h5 className={'my-0'} style={{ lineHeight: '1.1' }}>
+                                                <Row className={'align-items-center align-content-center gx-1'}>
+                                                    {server.joinLink &&
+                                                        <Col xs={'auto'}>
+                                                            <a
+                                                                href={server.joinLink}
+                                                                data-umami-event={'join-buddy'}
+                                                            >
+                                                                <i
+                                                                    className={'bi-play-circle text-white'}
+                                                                    title={'Join server'}
+                                                                />
+                                                            </a>
+                                                        </Col>
+                                                    }
+                                                    <Col xs={'auto'}>
+                                                        <Badge bg={'primary'}>
+                                                            <i
+                                                                className={'bi-activity'}
+                                                            /> {server.players.filter(isHumanPlayer).length} / {server.maxPlayers}
+                                                        </Badge>
+                                                    </Col>
+                                                    <Col xs={'auto'}>
+                                                        <Badge bg={'success'} className={''}>
+                                                            <i
+                                                                className={'bi-map'}
+                                                            /> <span
+                                                            className={'text-truncate d-inline-block align-bottom'}
+                                                            style={{ maxWidth: '180px' }}>
+                                                                {server.mapName}
+                                                            </span> ({server.mapSize})
+                                                        </Badge>
+                                                    </Col>
+                                                </Row>
+                                            </h5>
+                                        </Container>
                                     </CardText>
                                 }
                             </CardBody>
