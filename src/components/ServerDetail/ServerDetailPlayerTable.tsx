@@ -3,6 +3,7 @@ import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
 import { formatPlayerName } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
+import { BuddyToggle } from '@/components/BuddyToggle';
 
 type ServerDetailPlayerTableProps = {
     team?: Team
@@ -63,6 +64,9 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                                     </a>
                                 </span>
                                 )}
+                                <span className={'ms-1'}>
+                                    <BuddyToggle pid={p.pid} name={p.name} tag={p.tag}/>
+                                </span>
                             </td>
                             <td align={'right'}>{p.score}</td>
                             <td align={'right'}>{p.kills}</td>

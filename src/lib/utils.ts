@@ -1,4 +1,4 @@
-import { Player, Provider, Server } from '@/lib/types';
+import { Buddy, Player, Provider, Server } from '@/lib/types';
 
 export function formatProvider(provider: Provider): string {
     switch (provider) {
@@ -11,7 +11,7 @@ export function formatProvider(provider: Provider): string {
     }
 }
 
-export function formatPlayerName(player: Player): string {
+export function formatPlayerName(player: Player | Buddy): string {
     if (player.tag == '') {
         return player.name;
     }

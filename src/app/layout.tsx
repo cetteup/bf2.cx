@@ -12,15 +12,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <html lang={'en'}>
         <body>
         <div className={'bg-dark text-white min-vh-100 d-flex flex-column'} data-bs-theme={'dark'}>
-            <Header/>
-            <main className={'flex-grow-1'}>
-                <Container className={'p-2'}>
-                    <Providers>
+            <Providers>
+                <Header/>
+                <main className={'flex-grow-1'}>
+                    <Container className={'p-2'}>
                         {children}
-                    </Providers>
-                </Container>
-            </main>
-            <Footer/>
+                    </Container>
+                </main>
+                <Footer/>
+            </Providers>
         </div>
         <Script strategy={'afterInteractive'} data-website-id={'df68c4c9-e6c1-4bb8-848f-503ef2306f22'} src={'https://analytics.cetteup.com/script.js'} />
         </body>

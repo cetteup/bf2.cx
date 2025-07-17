@@ -7,6 +7,10 @@
     --bs-dark-rgb: 9, 9, 9;
 }
 
+.offcanvas {
+    --bs-offcanvas-width: 450px;
+}
+
 .accordion-button:not(.collapsed) {
     color: inherit;
 }
@@ -17,4 +21,36 @@
 
 .bi-youtube {
     color: #FF0000;
+}
+
+.badge.buddy {
+    animation: buddy-badge-fade-in ease-in .2s;
+}
+@keyframes buddy-badge-fade-in {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
+    }
+}
+
+i.buddy {
+    cursor: pointer;
+    transition: color .3s;
+}
+
+i.buddy:not(.buddy-active):hover {
+    color: var(--bs-success-text-emphasis);
+    transition: color .3s;
+}
+
+i.buddy-active {
+    color: var(--bs-success-text-emphasis);
+    transition: color .3s;
+}
+
+i.buddy-active:hover {
+    color: var(--bs-white);
+    transition: color .3s;
 }

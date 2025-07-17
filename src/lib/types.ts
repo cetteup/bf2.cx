@@ -41,3 +41,5 @@ export type Player = {
     teamLabel: string
     aibot: boolean
 }
+
+export type Buddy = Pick<Player, 'pid' | 'name' | 'tag'>

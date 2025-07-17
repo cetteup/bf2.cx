@@ -1,4 +1,4 @@
-import { Player } from '@/lib/types';
+import { Buddy, Player } from '@/lib/types';
 
 type Streamer = {
     pid: number
@@ -28,7 +28,7 @@ const streamers: Streamer[] = [
     },
 ];
 
-export const getActiveStreamerByPlayer = (player: Player): Streamer | undefined => {
+export const getActiveStreamerByPlayer = (player: Player | Buddy): Streamer | undefined => {
     // Require streamers to use STREAM tag as some kind of "I am currently streaming" indicator
     if (player.tag.toLowerCase() != 'stream') {
         return;
