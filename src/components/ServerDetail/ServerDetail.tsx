@@ -152,7 +152,6 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
             </Container>
 
             <Container>
-                {/*<FormCheck type={'switch'} label={'Battlerecorder'} readOnly checked={server.battlerecorder}/>*/}
                 <h5>
                     <Row className={'gx-3'}>
                         <Col xs={'auto'}><SettingToggle enabled={server.ranked} label={'Ranked'}/></Col>
