@@ -134,17 +134,17 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         <Col xs={'auto'}>
                             <Badge bg={'primary'}>
-                                <i className={'bi-server'}/> {server.ip}:{server.port}
-                            </Badge>
-                        </Col>
-                        <Col xs={'auto'}>
-                            <Badge className={'bg-light-subtle'}>
                                 <i className={'bi-activity'}/> {server.players.filter(isHumanPlayer).length} / {server.maxPlayers}
                             </Badge>
                         </Col>
                         <Col xs={'auto'}>
                             <Badge bg={'success'}>
                                 <i className={'bi-map'}/> {server.mapName} ({server.mapSize})
+                            </Badge>
+                        </Col>
+                        <Col xs={'auto'}>
+                            <Badge bg={'light-subtle'}>
+                                <i className={'bi-server'}/> {server.ip}:{server.port}
                             </Badge>
                         </Col>
                     </Row>

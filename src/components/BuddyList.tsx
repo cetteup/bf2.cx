@@ -113,7 +113,7 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                                     />
                                                 </a>
                                             }
-                                            <Badge className={'me-1 bg-light-subtle fs-6'}>
+                                            <Badge bg={'primary'} className={'me-1 fs-6'}>
                                                 <i
                                                     className={'bi-activity'}
                                                 /> {server.players.filter(isHumanPlayer).length} / {server.maxPlayers}
