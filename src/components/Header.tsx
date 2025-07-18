@@ -8,7 +8,6 @@ import {
     Navbar,
     NavbarBrand,
     NavbarCollapse,
-    NavbarText,
     NavbarToggle,
     NavLink,
 } from 'react-bootstrap';
@@ -51,25 +50,25 @@ export default function Header() {
                             }
                         </Button>
                     </Nav>
-                    <NavbarToggle className={'order-3'} aria-controls={'nav-links'}/>
+                    <NavbarToggle className={'order-4'} aria-controls={'nav-links'}/>
                     <NavbarCollapse id={'nav-links'} className={'order-last order-lg-first mb-1 mb-lg-0'}>
                         <Nav>
                             <NavLink as={Link} href={'/'} active={path == '/'}>Serverlist</NavLink>
                             <NavLink as={Link} href={'/faq'} active={path == '/faq'}>FAQ</NavLink>
-                            <NavbarText>
-                                <IconLink
-                                    icon={'bi-discord'}
-                                    href={'https://discord.gg/fq7c46prEX'}
-                                    title={'Discord'}
-                                    className={'me-3 mx-lg-3'}
-                                />
-                                <IconLink
-                                    icon={'bi-github'}
-                                    href={'https://github.com/cetteup/bf2.cx'}
-                                    title={'GitHub'}
-                                    className={'me-3 mx-lg-3'}
-                                />
-                            </NavbarText>
+                        </Nav>
+                        <Nav className={'ms-auto flex-row order-3'}>
+                            <IconLink
+                                icon={'bi-discord'}
+                                href={'https://discord.gg/fq7c46prEX'}
+                                title={'Discord'}
+                                className={'me-3 mx-lg-3'}
+                            />
+                            <IconLink
+                                icon={'bi-github'}
+                                href={'https://github.com/cetteup/bf2.cx'}
+                                title={'GitHub'}
+                                className={'me-3 mx-lg-2'}
+                            />
                         </Nav>
                     </NavbarCollapse>
                 </Container>
