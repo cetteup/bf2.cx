@@ -1,2 +1,2 @@
 # bf2.cx
-Another web-based Battlefield 2 server browser
+A new-generation web-based Battlefield 2 server browser inspired by cod.pm and bf2.tv
