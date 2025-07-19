@@ -54,6 +54,7 @@ const knownServers: { ip: string, provider: Provider }[] = [
     { ip: '193.105.56.76', provider: 'bf2hub.com' }, // [POT-R4] Middle East - Hosted by Po-Trade.com
     { ip: '185.107.97.236', provider: 'bf2hub.com' }, // rabujex
     { ip: '37.230.210.130', provider: 'playbf2.ru' }, // PlayBF2/T-Gamer
+    { ip: '95.31.234.79', provider: 'openspy.net' }, // PikORI BF2
 ];
 
 export function determineProvider(server: Server): [ Provider | undefined, boolean ] {
