@@ -44,10 +44,15 @@ const knownServers: { ip: string, provider: Provider }[] = [
     { ip: '173.234.79.175', provider: 'bf2hub.com' }, // Lost-Soldiers
     { ip: '138.197.130.124', provider: 'bf2hub.com' }, // Weekend Warriors
     { ip: '162.55.244.157', provider: 'bf2hub.com' }, // BF2L (and their customers)
+    { ip: '212.159.106.97', provider: 'bf2hub.com' }, // Team [UKoM]
     { ip: '51.195.137.46', provider: 'bf2hub.com' }, // *BF2 All Maps
     { ip: '51.68.220.134', provider: 'bf2hub.com' }, // =OLD=
     { ip: '74.91.114.239', provider: 'bf2hub.com' }, // The Other Guys
     { ip: '116.62.207.38', provider: 'bf2hub.com' }, // China #1 wuxianzaiju
+    { ip: '51.161.201.123', provider: 'bf2hub.com' }, // AUSTRALIAN HUB BF2
+    { ip: '38.7.216.154', provider: 'bf2hub.com' }, // BF2.cl | [Infanteria]
+    { ip: '193.105.56.76', provider: 'bf2hub.com' }, // [POT-R4] Middle East - Hosted by Po-Trade.com
+    { ip: '185.107.97.236', provider: 'bf2hub.com' }, // rabujex
     { ip: '37.230.210.130', provider: 'playbf2.ru' }, // PlayBF2/T-Gamer
 ];
 
