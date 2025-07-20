@@ -26,6 +26,12 @@ const streamers: Streamer[] = [
         platform: 'twitch',
         url: 'https://www.twitch.tv/tomixbf2',
     },
+    {
+        pid: 500290306,
+        name: '[XIII]GraViTy',
+        platform: 'twitch',
+        url: 'https://www.twitch.tv/gravityxiii',
+    },
 ];
 
 export const getActiveStreamerByPlayer = (player: Player | Buddy): Streamer | undefined => {
