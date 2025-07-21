@@ -54,3 +54,8 @@ i.buddy-active:hover {
     color: var(--bs-white);
     transition: color .3s;
 }
+
+table tr.bot td {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), 0.5);
+}

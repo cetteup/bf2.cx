@@ -47,13 +47,22 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                     // Show a stream platform link if player is known streamer (and currently [likely to be] live)
                     const streamer = getActiveStreamerByPlayer(p);
                     return (
-                        <tr key={i} className={'align-middle'}>
+                        <tr key={i} className={'align-middle ' + (!p.aibot ? 'player' : 'bot')}>
                             <td align={'right'}>{i + 1}</td>
                             <td>
-                                <a href={`https://playerpath.link/p/${p.pid}`}
-                                   className={'text-white text-decoration-none'}>
-                                    {formatPlayerName(p)}
-                                </a>
+                                {!p.aibot ? (
+                                    <a href={`https://playerpath.link/p/${p.pid}`}
+                                       className={'text-white text-decoration-none'}>
+                                        {formatPlayerName(p)}
+                                    </a>
+                                ) : (
+                                    <>
+                                        <span className={'me-1'}>
+                                            <i className={'bi-pc-display align-middle'} title={'Coop-bot'}/>
+                                        </span>
+                                        {formatPlayerName(p)}
+                                    </>
+                                )}
                                 {streamer && (
                                     <span className={'ms-1'}>
                                     <a href={streamer.url} data-umami-event={'watch-stream'}>
@@ -64,14 +73,16 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                                     </a>
                                 </span>
                                 )}
-                                <span className={'ms-1'}>
+                                {!p.aibot && (
+                                    <span className={'ms-1'}>
                                     <BuddyToggle pid={p.pid} name={p.name} tag={p.tag}/>
                                 </span>
+                                )}
                             </td>
                             <td align={'right'}>{p.score}</td>
                             <td align={'right'}>{p.kills}</td>
                             <td align={'right'}>{p.deaths}</td>
-                            <td align={'right'}>{p.ping}ms</td>
+                            <td align={'right'}>{p.ping == 0 || p.aibot ? '-' : p.ping + 'ms'}</td>
                         </tr>
                     );
                 })}
