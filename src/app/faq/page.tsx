@@ -25,7 +25,7 @@ export default function FAQ() {
                             {entry.header}
                         </AccordionHeader>
                         <AccordionBody>
-                            {entry.body}
+                            {typeof entry.body == 'function' ? entry.body(setActiveKey) : entry.body}
                         </AccordionBody>
                     </AccordionItem>
                 ))}

@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 type Entry = {
     id: string
     header: string | ReactNode
-    body: string | ReactNode
+    body: string | ReactNode | ((goToAnchor: (id: string) => void) => ReactNode)
 }
 
 export const entries: Entry[] = [
@@ -77,12 +78,64 @@ export const entries: Entry[] = [
         ),
     },
     {
+        id: 'different-providers',
+        header: 'What are BF2Hub, PlayBF2 and OpenSpy? And how do they differ?',
+        body: (goToAnchor) => (
+            <>
+                <p>
+                    <a href={'https://www.bf2hub.com/'} rel={'noreferrer'}>BF2Hub</a>, <a
+                    href={'http://playbf2.ru/'} rel={'noreferrer'}>PlayBF2</a> and <a
+                    href={'https://openspy.net/'} rel={'noreferrer'}>OpenSpy</a> are different projects/communities
+                    aiming to provide backend services originally provided by <a
+                    href={'https://en.wikipedia.org/wiki/GameSpy'} rel={'noreferrer'}>GameSpy</a>.
+                    These services are, for the most part, either required or essential to play Battlefield 2 online:
+                </p>
+                <ul>
+                    <li>server browsing and filtering</li>
+                    <li>login/authentication and account management</li>
+                    <li>player statistics and weapon unlocks</li>
+                </ul>
+                <h5>Differences</h5>
+                <p>
+                    The three &quot;providers&quot; all share the same goal of reviving older multiplayer games. BF2Hub
+                    and PlayBF2 focus exclusively on Battlefield 2, while OpenSpy aims to be a feature-complete
+                    GameSpy-replacement. Because OpenSpy is not specific to Battlefield 2, it does not currently support
+                    ranked servers and does not track player statistics. In contrast, BF2Hub and PlayBF2 both fully
+                    support player rank and unlock progression on ranked servers using their services.
+                </p>
+                <h5>Playing across providers</h5>
+                <p>
+                    Battlefield 2 was never designed to deal with more than one provider. Thus, &quot;crossplaying&quot;
+                    with e.g. a BF2Hub account on a PlayBF2 server leads to challenges. Generally speaking, a server
+                    from one provider won&lsquo;t be able to load or update statistics for a player using a different
+                    provider. To ensure players can progress towards ranks and unlock as expected, providers tend to
+                    only list game servers using their services directly. BF2Hub exclusively lists servers reporting
+                    directly to the BF2Hub backend. PlayBF2, however, does include select BF2Hub servers in their
+                    in-game server list. Going a step further, OpenSpy imports servers from all other providers.
+                </p>
+                <h5>Provider indicators on bf2.cx</h5>
+                <p>
+                    As only servers using the same provider as you will let you rank up and unlock new weapons, you may
+                    want to stick to playing on e.g. BF2Hub servers. If possible, we add an icon to servers indicating
+                    which provider they use. This enables us to list all servers regardless of their provider but still
+                    gives you the option of sticking to &quot;your&quot; provider.
+                </p>
+                <p>
+                    <strong>Note:</strong> In case you host Battlefield 2 servers, please ensure the servers report
+                    their provider. You can find details on how to configure your servers accordingly <Link
+                    href={'#greyed-out-provider-icons'}
+                    onClick={() => goToAnchor('greyed-out-provider-icons')}>below</Link>.
+                </p>
+            </>
+        ),
+    },
+    {
         id: 'greyed-out-provider-icons',
         header: 'Why is the BF2Hub/PlayBF2/OpenSpy logo greyed out for some servers?',
         body: (
             <>
                 <p>
-                    The &quot;provider&rdquo; icon is greyed out if a server does not actively report which provider it
+                    The provider icon is greyed out if a server does not actively report which provider it
                     is using. We do our best to determine the most likely provider for such servers. This, however,
                     involves additional effort and isn&lsquo;t error-free - which is why the logo is greyed out.
                 </p>
