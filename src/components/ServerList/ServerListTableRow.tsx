@@ -78,6 +78,7 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                             src={`/${provider}.png`}
                             width={16}
                             height={16}
+                            unoptimized={true}
                             style={{
                                 marginTop: '-3px',
                                 opacity: explicit ? '100%' : '60%',
