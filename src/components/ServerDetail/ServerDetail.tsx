@@ -172,7 +172,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                                 team={t}
                                 players={
                                     server.players
-                                        .filter((p) => isHumanPlayer(p) && p.team == t.index)
+                                        .filter((p) => (isHumanPlayer(p) || p.aibot) && p.team == t.index)
                                 }
                             />
                         </Col>
