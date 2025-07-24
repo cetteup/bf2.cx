@@ -50,16 +50,18 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                         <tr key={i} className={'align-middle ' + (!p.aibot ? 'player' : 'bot')}>
                             <td align={'right'}>{i + 1}</td>
                             <td>
-                                {!p.aibot ? (
+                                {!p.aibot && p.pid > 0 ? (
                                     <a href={`https://playerpath.link/p/${p.pid}`}
                                        className={'text-white text-decoration-none'}>
                                         {formatPlayerName(p)}
                                     </a>
                                 ) : (
                                     <>
-                                        <span className={'me-1'}>
-                                            <i className={'bi-pc-display align-middle'} title={'Coop-bot'}/>
-                                        </span>
+                                        {p.aibot && (
+                                            <span className={'me-1'}>
+                                                <i className={'bi-pc-display align-middle'} title={'Coop-bot'}/>
+                                            </span>
+                                        )}
                                         {formatPlayerName(p)}
                                     </>
                                 )}
