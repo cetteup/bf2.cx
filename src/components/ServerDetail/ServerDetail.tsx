@@ -48,23 +48,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                 </h1>
                 <h3>
                     <Row className={'align-items-center align-content-center gx-3 gy-3'}>
-                        {provider == 'bf2hub.com' &&
+                        {provider &&
                             <Col xs={'auto'}>
                                 <Image
-                                    src={`/${provider}-lg.png`}
-                                    width={82}
-                                    height={28}
-                                    quality={100}
-                                    className={'align-middle'}
-                                    style={{ marginBottom: '3px' }}
-                                    alt={formatProvider(provider)}
-                                />
-                            </Col>
-                        }
-                        {provider && provider != 'bf2hub.com' &&
-                            <Col xs={'auto'}>
-                                <Image
-                                    src={`/${provider}-lg.png`}
+                                    src={`/${provider}.png`}
                                     width={36}
                                     height={36}
                                     quality={100}
