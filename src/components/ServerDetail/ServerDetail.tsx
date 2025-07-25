@@ -58,6 +58,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                                     className={'align-middle'}
                                     style={{ marginBottom: '2px' }}
                                     alt={formatProvider(provider)}
+                                    title={'Uses ' + formatProvider(provider)}
                                 />
                             </Col>
                         }
