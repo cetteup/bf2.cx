@@ -17,17 +17,27 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 <span className={'me-2'}>
                 {server.ranked ? (
                     <Image
-                        src={'/ranked.png'}
+                        src={'/ranked.svg'}
                         width={16}
                         height={16}
+                        style={{
+                            width: '12pt',
+                            height: '12pt',
+                            verticalAlign: '-0.125rem',
+                        }}
                         alt={'Ranked'}
                         title={'Ranked'}
                     />
                 ) : (
                     <Image
-                        src={'/unranked.png'}
+                        src={'/unranked.svg'}
                         width={16}
                         height={16}
+                        style={{
+                            width: '12pt',
+                            height: '12pt',
+                            verticalAlign: '-0.125rem',
+                        }}
                         alt={'Unranked'}
                         title={'Unranked'}
                     />
