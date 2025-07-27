@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 import { Server } from '@/lib/types';
 import { notFound } from 'next/navigation';
+import { ExternalLink } from '@/components/ExternalLink';
 
 type ServerDetailProps = {
     initial: Server
@@ -74,37 +75,37 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         {isValidURL(server.demoIndex, 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.demoIndex} data-umami-event={'browse-demos'}>
+                                <ExternalLink href={server.demoIndex} data-umami-event={'browse-demos'}>
                                     <i
                                         className={'bi-film text-white'}
                                         title={'Browse demo index'}
                                     />
-                                </a>
+                                </ExternalLink>
                             </Col>
                         )}
                         {isValidURL(server.variables['website'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.variables['website']} data-umami-event={'visit-website'}>
+                                <ExternalLink href={server.variables['website']} data-umami-event={'visit-website'}>
                                     <i
                                         className={'bi-link-45deg text-white'}
                                         title={'Visit website'}
                                     />
-                                </a>
+                                </ExternalLink>
                             </Col>
                         )}
                         {isValidURL(server.variables['discord'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <a href={server.variables['discord']} data-umami-event={'join-discord'}>
+                                <ExternalLink href={server.variables['discord']} data-umami-event={'join-discord'}>
                                     <i
                                         className={'bi-discord text-white'}
                                         title={'Join Discord'}
                                     />
-                                </a>
+                                </ExternalLink>
                             </Col>
                         )}
                         {isValidURL(server.variables['teamspeak'], 'http:', 'https:', 'ts3server:', 'teamspeak:') && (
                             <Col xs={'auto'}>
-                                <a href={server.variables['teamspeak']} data-umami-event={'join-teamspeak'}>
+                                <ExternalLink href={server.variables['teamspeak']} data-umami-event={'join-teamspeak'}>
                                     <Image
                                         src={'/teamspeak.png'}
                                         width={28}
@@ -117,7 +118,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                                         alt={'TeamSpeak'}
                                         title={'Join TeamSpeak'}
                                     />
-                                </a>
+                                </ExternalLink>
                             </Col>
                         )}
                         <Col xs={'auto'}>
