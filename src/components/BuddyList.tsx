@@ -132,9 +132,9 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                                                 className={'bi-map'}
                                                             /> <span
                                                             className={'text-truncate d-inline-block align-bottom'}
-                                                            style={{ maxWidth: '180px' }}>
-                                                                {server.mapName}
-                                                            </span> ({server.mapSize})
+                                                            style={{ maxWidth: '170px' }}>
+                                                                {server.mapName} ({server.mapSize})
+                                                            </span>
                                                         </Badge>
                                                     </Col>
                                                 </Row>
