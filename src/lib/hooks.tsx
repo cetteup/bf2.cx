@@ -13,14 +13,14 @@ export function useHasMounted() {
 declare global {
     interface Window {
         umami?: {
-            track: (eventName: string, eventData?: Record<string, any>) => void;
+            track: (eventName: string, eventData?: Record<string, unknown>) => void;
         };
     }
 }
 
 export function useTracking() {
     const trackEvent = useCallback(
-        (eventName: string, eventData?: Record<string, any>) => {
+        (eventName: string, eventData?: Record<string, unknown>) => {
             if (typeof window !== 'undefined' && window.umami?.track) {
                 window.umami.track(eventName, eventData);
             }
