@@ -70,7 +70,9 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                             <Col xs={'auto'}>
                                 <a
                                     href={server.joinLink}
-                                    onClick={() => trackEvent('join-server')}
+                                    onClick={() => trackEvent('join-server', {
+                                        server: server?.name,
+                                    })}
                                 >
                                     <i
                                         className={'bi-play-circle text-white'}
@@ -83,7 +85,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                             <Col xs={'auto'}>
                                 <ExternalLink
                                     href={server.demoIndex}
-                                    onClick={() => trackEvent('browse-demos')}
+                                    onClick={() => trackEvent('browse-demos', {
+                                        server: server?.name,
+                                        index: server?.demoIndex,
+                                    })}
                                 >
                                     <i
                                         className={'bi-film text-white'}
@@ -96,7 +101,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                             <Col xs={'auto'}>
                                 <ExternalLink
                                     href={server.variables['website']}
-                                    onClick={() => trackEvent('visit-website')}
+                                    onClick={() => trackEvent('visit-website', {
+                                        server: server?.name,
+                                        website: server?.variables['website'],
+                                    })}
                                 >
                                     <i
                                         className={'bi-link-45deg text-white'}
@@ -109,7 +117,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                             <Col xs={'auto'}>
                                 <ExternalLink
                                     href={server.variables['discord']}
-                                    onClick={() => trackEvent('join-discord')}
+                                    onClick={() => trackEvent('join-discord', {
+                                        server: server?.name,
+                                        discord: server?.variables['discord'],
+                                    })}
                                 >
                                     <i
                                         className={'bi-discord text-white'}
@@ -122,7 +133,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                             <Col xs={'auto'}>
                                 <ExternalLink
                                     href={server.variables['teamspeak']}
-                                    onClick={() => trackEvent('join-teamspeak')}
+                                    onClick={() => trackEvent('join-teamspeak', {
+                                        server: server?.name,
+                                        teamspeak: server?.variables['teamspeak'],
+                                    })}
                                 >
                                     <Image
                                         src={'/teamspeak.png'}

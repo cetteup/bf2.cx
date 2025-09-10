@@ -88,7 +88,10 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                         <span className={'mx-1'}>
                                             <a
                                                 href={streamer.url}
-                                                onClick={() => trackEvent('watch-stream')}
+                                                onClick={() => trackEvent('watch-stream', {
+                                                    streamer: streamer?.name,
+                                                    stream: streamer?.url,
+                                                })}
                                             >
                                                 <i
                                                     className={`bi-${streamer.platform} align-middle`}
@@ -116,7 +119,10 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                                         <Col xs={'auto'}>
                                                             <a
                                                                 href={server.joinLink}
-                                                                onClick={() => trackEvent('join-buddy')}
+                                                                onClick={() => trackEvent('join-buddy', {
+                                                                    buddy: b.name,
+                                                                    server: server?.name,
+                                                                })}
                                                             >
                                                                 <i
                                                                     className={'bi-play-circle text-white'}
