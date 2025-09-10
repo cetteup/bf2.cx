@@ -2,17 +2,23 @@ import { AnchorHTMLAttributes, DetailedHTMLProps, FC, MouseEvent, useState } fro
 import { Button, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle, Row } from 'react-bootstrap';
 import { redirect, RedirectType } from 'next/navigation';
 
-type ExternalLinkProps = DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> & {
+type ExternalLinkProps = Omit<DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>, 'onClick'> & {
     href: string;
+    onClick?: () => void;
 }
 
-export const ExternalLink: FC<ExternalLinkProps> = ({ href, children, ...props }) => {
+export const ExternalLink: FC<ExternalLinkProps> = ({ href, onClick, children, ...props }) => {
     const [ modalShow, setModalShow ] = useState(false);
 
     const url = new URL(href);
 
     const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
+
+        if (onClick) {
+            onClick();
+        }
+
         // Don't show modal for trusted/well-known hostnames
         if (isTrustedHostname(url.hostname)) {
             redirect(url.href, RedirectType.push);

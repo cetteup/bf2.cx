@@ -22,6 +22,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchServers } from '@/lib/fetch';
 import Link from 'next/link';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
+import { useTracking } from '@/lib/hooks';
 
 type BuddyListProps = {
     show: boolean
@@ -30,6 +31,8 @@ type BuddyListProps = {
 }
 
 export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
+    const { trackEvent } = useTracking();
+
     const { value: buddies } = useBuddyList();
     const { data: servers } = useSuspenseQuery({
         queryKey: [ 'servers' ],
@@ -83,7 +86,10 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                     </span>
                                     {streamer && (
                                         <span className={'mx-1'}>
-                                            <a href={streamer.url} data-umami-event={'watch-stream'}>
+                                            <a
+                                                href={streamer.url}
+                                                onClick={() => trackEvent('watch-stream')}
+                                            >
                                                 <i
                                                     className={`bi-${streamer.platform} align-middle`}
                                                     title={'Watch live-stream'}
@@ -110,7 +116,7 @@ export const BuddyList: FC<BuddyListProps> = ({ show, onHide, setOnline }) => {
                                                         <Col xs={'auto'}>
                                                             <a
                                                                 href={server.joinLink}
-                                                                data-umami-event={'join-buddy'}
+                                                                onClick={() => trackEvent('join-buddy')}
                                                             >
                                                                 <i
                                                                     className={'bi-play-circle text-white'}

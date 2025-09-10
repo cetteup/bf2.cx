@@ -11,12 +11,15 @@ import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 import { Server } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import { ExternalLink } from '@/components/ExternalLink';
+import { useTracking } from '@/lib/hooks';
 
 type ServerDetailProps = {
     initial: Server
 }
 
 export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
+    const { trackEvent } = useTracking();
+
     const { ip, port } = initial;
     const { data: server } = useSuspenseQuery({
         queryKey: [ 'servers', ip, port ],
@@ -65,7 +68,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         }
                         {server.joinLink && (
                             <Col xs={'auto'}>
-                                <a href={server.joinLink} data-umami-event={'join-server'}>
+                                <a
+                                    href={server.joinLink}
+                                    onClick={() => trackEvent('join-server')}
+                                >
                                     <i
                                         className={'bi-play-circle text-white'}
                                         title={'Join server'}
@@ -75,7 +81,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         {isValidURL(server.demoIndex, 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <ExternalLink href={server.demoIndex} data-umami-event={'browse-demos'}>
+                                <ExternalLink
+                                    href={server.demoIndex}
+                                    onClick={() => trackEvent('browse-demos')}
+                                >
                                     <i
                                         className={'bi-film text-white'}
                                         title={'Browse demo index'}
@@ -85,7 +94,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         {isValidURL(server.variables['website'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <ExternalLink href={server.variables['website']} data-umami-event={'visit-website'}>
+                                <ExternalLink
+                                    href={server.variables['website']}
+                                    onClick={() => trackEvent('visit-website')}
+                                >
                                     <i
                                         className={'bi-link-45deg text-white'}
                                         title={'Visit website'}
@@ -95,7 +107,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         {isValidURL(server.variables['discord'], 'http:', 'https:') && (
                             <Col xs={'auto'}>
-                                <ExternalLink href={server.variables['discord']} data-umami-event={'join-discord'}>
+                                <ExternalLink
+                                    href={server.variables['discord']}
+                                    onClick={() => trackEvent('join-discord')}
+                                >
                                     <i
                                         className={'bi-discord text-white'}
                                         title={'Join Discord'}
@@ -105,7 +120,10 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                         )}
                         {isValidURL(server.variables['teamspeak'], 'http:', 'https:', 'ts3server:', 'teamspeak:') && (
                             <Col xs={'auto'}>
-                                <ExternalLink href={server.variables['teamspeak']} data-umami-event={'join-teamspeak'}>
+                                <ExternalLink
+                                    href={server.variables['teamspeak']}
+                                    onClick={() => trackEvent('join-teamspeak')}
+                                >
                                     <Image
                                         src={'/teamspeak.png'}
                                         width={28}

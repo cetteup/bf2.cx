@@ -4,6 +4,7 @@ import { Placeholder, Table } from 'react-bootstrap';
 import { formatPlayerName } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
 import { BuddyToggle } from '@/components/BuddyToggle';
+import { useTracking } from '@/lib/hooks';
 
 type ServerDetailPlayerTableProps = {
     team?: Team
@@ -12,6 +13,8 @@ type ServerDetailPlayerTableProps = {
 }
 
 export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team, players, isLoading }) => {
+    const { trackEvent } = useTracking();
+
     return (
         <>
             <div className={'pe-auto my-2'}>
@@ -67,7 +70,10 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                                 )}
                                 {streamer && (
                                     <span className={'ms-1'}>
-                                    <a href={streamer.url} data-umami-event={'watch-stream'}>
+                                    <a
+                                        href={streamer.url}
+                                        onClick={() => trackEvent('watch-stream')}
+                                    >
                                         <i
                                             className={`bi-${streamer.platform} align-middle`}
                                             title={'Watch live-stream'}

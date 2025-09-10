@@ -17,9 +17,11 @@ import { IconLink } from '@/components/IconLink';
 import Image from 'next/image';
 import { BuddyList } from '@/components/BuddyList';
 import { useState } from 'react';
+import { useTracking } from '@/lib/hooks';
 
 export default function Header() {
     const path = usePathname();
+    const { trackEvent } = useTracking();
     const [ onlineBuddyCount, setOnlineBuddyCount ] = useState(0);
     const [ showBuddyList, setShowBuddyList ] = useState(false);
 
@@ -40,9 +42,11 @@ export default function Header() {
                     <Nav className={'ms-auto me-2 me-lg-0 order-2 order-lg-1'}>
                         <Button
                             variant={'outline-light'}
-                            onClick={() => setShowBuddyList(true)}
+                            onClick={() => {
+                                setShowBuddyList(true);
+                                trackEvent('view-buddies');
+                            }}
                             className={'ms-3'}
-                            data-umami-event={'view-buddies'}
                         >
                             Buddies
                             {onlineBuddyCount > 0 &&
