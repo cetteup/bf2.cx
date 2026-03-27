@@ -16,14 +16,17 @@ import Link from 'next/link';
 import { IconLink } from '@/components/IconLink';
 import Image from 'next/image';
 import { BuddyList } from '@/components/BuddyList';
+import { UpdateTimer } from '@/components/UpdateTimer';
 import { useState } from 'react';
 import { useTracking } from '@/lib/hooks';
+import { useUpdateTimer } from '@/lib/hooks/useUpdateTimer';
 
 export default function Header() {
     const path = usePathname();
     const { trackEvent } = useTracking();
     const [ onlineBuddyCount, setOnlineBuddyCount ] = useState(0);
     const [ showBuddyList, setShowBuddyList ] = useState(false);
+    const nextUpdateTime = useUpdateTimer(['servers'], 30000);
 
     return (
         <header>
@@ -40,6 +43,11 @@ export default function Header() {
                         /> BF2.CX
                     </NavbarBrand>
                     <Nav className={'ms-auto me-2 me-lg-0 order-2 order-lg-1'}>
+                        <div className={'ms-3'}>
+                            <UpdateTimer nextUpdateTime={nextUpdateTime} />
+                        </div>
+                    </Nav>
+                    <Nav className={'me-2 me-lg-0 order-2 order-lg-1'}>
                         <Button
                             variant={'outline-light'}
                             onClick={() => {
