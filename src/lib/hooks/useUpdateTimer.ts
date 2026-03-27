@@ -7,14 +7,12 @@ import { useEffect, useState } from 'react';
  */
 export function useUpdateTimer(queryKey: (string | number)[], refetchInterval: number = 30000) {
     const queryClient = useQueryClient();
-    const [nextUpdateTime, setNextUpdateTime] = useState<number>(Date.now() + refetchInterval);
+    const [ nextUpdateTime, setNextUpdateTime ] = useState<number>(Date.now() + refetchInterval);
 
     useEffect(() => {
-        const query = queryClient.getQueryData(queryKey);
-        
         // Get the query's state metadata
         const queryState = queryClient.getQueryState(queryKey);
-        
+
         if (queryState) {
             // Set initial next update time based on when the last fetch occurred
             const lastFetchTime = queryState.dataUpdatedAt || Date.now();
@@ -33,7 +31,7 @@ export function useUpdateTimer(queryKey: (string | number)[], refetchInterval: n
         });
 
         return () => unsubscribe();
-    }, [queryKey, queryClient, refetchInterval]);
+    }, [ queryKey, queryClient, refetchInterval ]);
 
     return nextUpdateTime;
 }

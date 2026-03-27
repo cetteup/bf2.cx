@@ -9,8 +9,8 @@ interface UpdateTimerProps {
 }
 
 export function UpdateTimer({ nextUpdateTime, refetchInterval = 30000 }: UpdateTimerProps) {
-    const [timeLeft, setTimeLeft] = useState(0);
-    const [progress, setProgress] = useState(100);
+    const [ timeLeft, setTimeLeft ] = useState(0);
+    const [ progress, setProgress ] = useState(100);
 
     useEffect(() => {
         const updateTimer = () => {
@@ -24,7 +24,7 @@ export function UpdateTimer({ nextUpdateTime, refetchInterval = 30000 }: UpdateT
             }
 
             setTimeLeft(totalTime);
-            
+
             // Calculate progress percentage (0-100)
             // Progress goes from 100% (just updated) to 0% (time to update)
             const progressPercent = (totalTime / refetchInterval) * 100;
@@ -35,21 +35,19 @@ export function UpdateTimer({ nextUpdateTime, refetchInterval = 30000 }: UpdateT
         const interval = setInterval(updateTimer, 100);
 
         return () => clearInterval(interval);
-    }, [nextUpdateTime, refetchInterval]);
+    }, [ nextUpdateTime, refetchInterval ]);
 
     const seconds = Math.ceil(timeLeft / 1000);
 
     return (
         <div className={styles.container} title={`Next update in ${seconds}s`}>
             <svg className={styles.circle} viewBox="0 0 100 100">
-                {/* Background circle */}
                 <circle
                     cx="50"
                     cy="50"
                     r="45"
                     className={styles.background}
                 />
-                {/* Progress circle */}
                 <circle
                     cx="50"
                     cy="50"
