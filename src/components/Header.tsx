@@ -26,8 +26,6 @@ export default function Header() {
     const { trackEvent } = useTracking();
     const [ onlineBuddyCount, setOnlineBuddyCount ] = useState(0);
     const [ showBuddyList, setShowBuddyList ] = useState(false);
-    
-    // Track the next update time for the main servers query (30 second interval)
     const nextUpdateTime = useUpdateTimer(['servers'], 30000);
 
     return (
@@ -45,7 +43,11 @@ export default function Header() {
                         /> BF2.CX
                     </NavbarBrand>
                     <Nav className={'ms-auto me-2 me-lg-0 order-2 order-lg-1'}>
-                        <UpdateTimer nextUpdateTime={nextUpdateTime} />
+                        <div className={'ms-3'}>
+                            <UpdateTimer nextUpdateTime={nextUpdateTime} />
+                        </div>
+                    </Nav>
+                    <Nav className={'me-2 me-lg-0 order-2 order-lg-1'}>
                         <Button
                             variant={'outline-light'}
                             onClick={() => {
