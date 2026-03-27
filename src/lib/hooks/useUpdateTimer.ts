@@ -25,7 +25,7 @@ export function useUpdateTimer(queryKey: (string | number)[], refetchInterval: n
         const unsubscribe = queryClient.getQueryCache().subscribe((event) => {
             // Check if this event is for our query
             if (event.query.queryKey[0] === queryKey[0]) {
-                if (event.type === 'success' || event.type === 'updated') {
+                if (event.type === 'updated') {
                     // Query was refetched, set next update time
                     setNextUpdateTime(Date.now() + refetchInterval);
                 }
