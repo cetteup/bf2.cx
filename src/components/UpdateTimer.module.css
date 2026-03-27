@@ -21,7 +21,7 @@
 
 .progress {
     fill: none;
-    stroke: var(--bs-primary);
+    stroke: var(--bs-light);
     stroke-width: 3;
     stroke-linecap: round;
     transition: stroke-dasharray 100ms linear;
