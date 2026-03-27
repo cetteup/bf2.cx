@@ -43,7 +43,7 @@ export default function Header() {
                         /> BF2.CX
                     </NavbarBrand>
                     <Nav className={'ms-auto me-2 me-lg-0 order-2 order-lg-1'}>
-                        <div className={'ms-3'}>
+                        <div className={'ms-2 ms-md-3'}>
                             <UpdateTimer nextUpdateTime={nextUpdateTime} />
                         </div>
                     </Nav>
@@ -54,11 +54,14 @@ export default function Header() {
                                 setShowBuddyList(true);
                                 trackEvent('view-buddies');
                             }}
-                            className={'ms-3'}
+                            className={'ms-2 ms-md-3'}
                         >
                             Buddies
                             {onlineBuddyCount > 0 &&
-                                <Badge bg={'success'} className={'ms-1 buddy'}>{onlineBuddyCount} online</Badge>
+                                <Badge bg={'success'} className={'ms-1 buddy'}>
+                                    {onlineBuddyCount}
+                                    <span className={'d-none d-md-inline'}> online</span>
+                                </Badge>
                             }
                         </Button>
                     </Nav>
