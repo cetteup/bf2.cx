@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
     },
     images: {
         minimumCacheTTL: 12 * 60 * 60,
+        qualities: [ 100, 75, 50, 25 ],
     },
 };
 
