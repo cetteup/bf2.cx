@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
+
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export function useHasMounted() {
-    const [ hasMounted, setHasMounted ] = useState(false);
-
-    useEffect(() => {
-        setHasMounted(true);
-    }, []);
-
-    return hasMounted;
+    return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 declare global {
@@ -30,4 +28,3 @@ export function useTracking() {
 
     return { trackEvent };
 }
-

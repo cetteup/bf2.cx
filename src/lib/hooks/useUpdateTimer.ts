@@ -7,18 +7,14 @@ import { useEffect, useState } from 'react';
  */
 export function useUpdateTimer(queryKey: (string | number)[], refetchInterval: number = 30000) {
     const queryClient = useQueryClient();
-    const [ nextUpdateTime, setNextUpdateTime ] = useState<number>(Date.now() + refetchInterval);
+    const [ nextUpdateTime, setNextUpdateTime ] = useState<number>(() => {
+        const queryState = queryClient.getQueryState(queryKey);
+        const lastFetchTime = queryState?.dataUpdatedAt || Date.now();
+
+        return lastFetchTime + refetchInterval;
+    });
 
     useEffect(() => {
-        // Get the query's state metadata
-        const queryState = queryClient.getQueryState(queryKey);
-
-        if (queryState) {
-            // Set initial next update time based on when the last fetch occurred
-            const lastFetchTime = queryState.dataUpdatedAt || Date.now();
-            setNextUpdateTime(lastFetchTime + refetchInterval);
-        }
-
         // Listen for query updates
         const unsubscribe = queryClient.getQueryCache().subscribe((event) => {
             // Check if this event is for our query

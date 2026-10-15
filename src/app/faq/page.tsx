@@ -2,31 +2,44 @@
 
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap';
 import { entries } from '@/lib/faq';
-import { useParams, usePathname } from 'next/navigation';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { AccordionEventKey } from 'react-bootstrap/AccordionContext';
+import { useHasMounted } from '@/lib/hooks';
 
 export default function FAQ() {
-    const [ activeKey, setActiveKey ] = useState<AccordionEventKey>();
-    const params = useParams();
     const path = usePathname();
+    const hasMounted = useHasMounted();
+    const [ activeSelection, setActiveSelection ] = useState<{
+        path: string;
+        key: AccordionEventKey;
+    } | null>(null);
+    const activeKey = activeSelection?.path === path
+        ? activeSelection.key
+        : (hasMounted ? window.location.hash.slice(1) || undefined : undefined);
 
     useEffect(() => {
-        setActiveKey(window.location.hash.slice(1));
-        scrollIntoView(document.getElementById(window.location.hash.slice(1)));
-    }, [ params ]);
+        if (hasMounted && activeKey) {
+            if (typeof activeKey === 'string') {
+                scrollIntoView(document.getElementById(activeKey));
+            }
+        }
+    }, [ activeKey, hasMounted ]);
 
     useEffect(() => {
+        if (!hasMounted) {
+            return;
+        }
+
         const anchor = activeKey ? '#' + activeKey : path;
         history.replaceState(null, '', anchor);
-    }, [ activeKey, path ]);
+    }, [ activeKey, hasMounted, path ]);
 
-    const onSelect = (key: AccordionEventKey, event: SyntheticEvent<unknown, Event>) => {
-        setActiveKey(key);
-        if (key != null && event.target instanceof Element) {
-            scrollIntoView(event.target);
-        }
+    const setActiveKey = (key: AccordionEventKey) => {
+        setActiveSelection({ path, key });
     };
+
+    const onSelect = (key: AccordionEventKey) => setActiveKey(key);
 
     return (
         <>

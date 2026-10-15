@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Buddy } from '@/lib/types';
 import { useBuddyList } from '@/lib/localstorage';
 import { useHasMounted } from '@/lib/hooks';
@@ -14,24 +14,12 @@ type BuddyToggleProps = {
 export const BuddyToggle: FC<BuddyToggleProps> = ({ pid, name, tag }) => {
     const { value: buddies, setValue: setBuddies } = useBuddyList();
     const [ hover, setHover ] = useState(false);
-    const [ className, setClassName ] = useState('bi-person');
     const hasMounted = useHasMounted();
 
-    useEffect(() => {
-        if (isBuddy(pid, name, buddies)) {
-            if (hover) {
-                setClassName('bi-person-fill-dash buddy-active');
-            } else {
-                setClassName('bi-person-fill buddy-active');
-            }
-        } else {
-            if (hover) {
-                setClassName('bi-person-fill-add');
-            } else {
-                setClassName('bi-person');
-            }
-        }
-    }, [ pid, name, buddies, hover ]);
+    const buddy = isBuddy(pid, name, buddies);
+    const className = buddy
+        ? (hover ? 'bi-person-fill-dash buddy-active' : 'bi-person-fill buddy-active')
+        : (hover ? 'bi-person-fill-add' : 'bi-person');
 
     // Prevent hydration errors
     // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
@@ -44,9 +32,9 @@ export const BuddyToggle: FC<BuddyToggleProps> = ({ pid, name, tag }) => {
     return (
         <i
             className={'buddy ' + className}
-            title={isBuddy(pid, name, buddies) ? 'Remove buddy' : 'Add buddy'}
+            title={buddy ? 'Remove buddy' : 'Add buddy'}
             onClick={() => {
-                if (isBuddy(pid, name, buddies)) {
+                if (buddy) {
                     setBuddies(buddies.filter((b) => b.pid != pid && b.name != name));
                 } else {
                     setBuddies([ ...buddies, { pid, name, tag } ]);
