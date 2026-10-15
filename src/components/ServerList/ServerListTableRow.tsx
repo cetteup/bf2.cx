@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
+import { isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { Server } from '@/lib/types';
 import { HoverPrefetchLink } from '@/components/HoverPrefetchLink';
 import { ExternalLink } from '@/components/ExternalLink';
 import { useTracking } from '@/lib/hooks';
+import { ProviderIcon } from '@/components/ProviderIcon';
 
 type ServerListEntryProps = {
     server: Server
@@ -12,7 +13,6 @@ type ServerListEntryProps = {
 
 export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
     const { trackEvent } = useTracking();
-    const [ provider, explicit ] = determineProvider(server);
 
     return (
         <tr>
@@ -85,21 +85,14 @@ export const ServerListTableRow: FC<ServerListEntryProps> = ({ server }) => {
                 )}
             </td>
             <td>
-                {provider && (
-                    <span>
-                        <Image
-                            src={`/${provider}.png`}
-                            width={16}
-                            height={16}
-                            style={{
-                                marginTop: '-3px',
-                                opacity: explicit ? '100%' : '60%',
-                            }}
-                            alt={formatProvider(provider)}
-                            title={'Uses ' + formatProvider(provider)}
-                        />
-                    </span>
-                )}
+                <ProviderIcon
+                    server={server}
+                    width={16}
+                    height={16}
+                    style={{
+                        marginTop: '-3px',
+                    }}
+                />
             </td>
             <td className={'align-middle'}>
                 <HoverPrefetchLink href={`/servers/${server.ip}:${server.port}`} className={'text-white text-decoration-none'}>

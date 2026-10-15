@@ -5,13 +5,14 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchServer } from '@/lib/fetch';
 import { Badge, Col, Container, Row } from 'react-bootstrap';
 import { ServerDetailPlayerTable } from '@/components/ServerDetail/ServerDetailPlayerTable';
-import { determineProvider, formatProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
+import { determineProvider, isHumanPlayer, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 import { Server } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import { ExternalLink } from '@/components/ExternalLink';
 import { useTracking } from '@/lib/hooks';
+import { ProviderIcon } from '@/components/ProviderIcon';
 
 type ServerDetailProps = {
     initial: Server
@@ -52,20 +53,17 @@ export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
                 </h1>
                 <h3>
                     <Row className={'align-items-center align-content-center gx-3 gy-3'}>
-                        {provider &&
+                        {provider && (
                             <Col xs={'auto'}>
-                                <Image
-                                    src={`/${provider}.png`}
+                                <ProviderIcon
+                                    server={server}
                                     width={36}
                                     height={36}
-                                    quality={100}
                                     className={'align-middle'}
                                     style={{ marginBottom: '2px' }}
-                                    alt={formatProvider(provider)}
-                                    title={'Uses ' + formatProvider(provider)}
                                 />
                             </Col>
-                        }
+                        )}
                         {server.joinLink && (
                             <Col xs={'auto'}>
                                 <a
