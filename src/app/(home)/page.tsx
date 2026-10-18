@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { Alert } from 'react-bootstrap';
 
 // Disable ISR (server list is too dynamic to cache at build time and revalidate)
-export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: 'BF2.CX - Browse Battlefield 2 servers',
