@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
-import { formatPlayerName } from '@/lib/utils';
+import { buildPlayerProfileURL, formatPlayerName } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
 import { BuddyToggle } from '@/components/BuddyToggle';
 import { useTracking } from '@/lib/hooks';
@@ -54,7 +54,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
                             <td align={'right'}>{i + 1}</td>
                             <td>
                                 {!p.aibot && p.pid > 0 ? (
-                                    <a href={`https://playerpath.link/p/${p.pid}`}
+                                    <a href={buildPlayerProfileURL(p)}
                                        className={'text-white text-decoration-none'}>
                                         {formatPlayerName(p)}
                                     </a>
