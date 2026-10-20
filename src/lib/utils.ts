@@ -20,9 +20,14 @@ export function formatPlayerName(player: Player | Buddy): string {
 }
 
 export function buildPlayerProfileURL(player: Player): string {
-    const url = new URL('https://playerpath.link/p/' + player.pid);
+    const url = new URL(
+        '/p/' + player.pid,
+        'https://playerpath.link/',
+    );
     // Add nick to act as tiebreaker in case of multiple players with the same pid
     url.searchParams.set('nick', player.name);
+    // Add tag to allow redirector to detect truncated player names
+    url.searchParams.set('tag', player.tag);
     return url.href;
 }
 
