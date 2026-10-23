@@ -73,3 +73,8 @@ export const {
     LocalStorageProvider: BuddyListProvider,
     useLocalStorageContext: useBuddyList,
 } = createLocalStorageContext<Buddy[]>('buddies', []);
+
+export const {
+    LocalStorageProvider: DismissedAlertsProvider,
+    useLocalStorageContext: useDismissedAlerts,
+} = createLocalStorageContext<string[]>('dismissed-alerts', []);

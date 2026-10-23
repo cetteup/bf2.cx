@@ -3,7 +3,7 @@ import { dehydrate, HydrationBoundary, noop } from '@tanstack/react-query';
 import { fetchServers } from '@/lib/fetch';
 import { ServerList } from '@/components/ServerList/ServerList';
 import type { Metadata } from 'next';
-import { Alert } from 'react-bootstrap';
+import { PersistedAlert } from '@/components/PersistedAlert';
 
 // Disable ISR (server list is too dynamic to cache at build time and revalidate)
 export const dynamic = 'force-dynamic';
@@ -27,10 +27,10 @@ export default async function Home() {
     return (
         <>
             <h1 className={'display-4'}>Browse Battlefield 2 servers</h1>
-            <Alert variant={'info'} dismissible>
+            <PersistedAlert alertKey={'home-automatic-server-list-update'} variant={'info'} className={'alert-enter'}>
                 <i className={'bi-info-circle-fill me-2'}/>
                 The server list self-updates, no need to refresh the page or press any buttons!
-            </Alert>
+            </PersistedAlert>
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <ServerList/>
             </HydrationBoundary>

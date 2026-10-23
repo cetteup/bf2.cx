@@ -2,6 +2,9 @@ import { fetchServer } from '@/lib/fetch';
 import { ServerDetail } from '@/components/ServerDetail/ServerDetail';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { AlertHeading, AlertLink } from 'react-bootstrap';
+import { PersistedAlert } from '@/components/PersistedAlert';
+import { isEmpty } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,6 +45,15 @@ export default async function ServerPage({ params }: Props) {
 
     return (
         <>
+            {isEmpty(server.variables) &&
+                <PersistedAlert alertKey={'server-add-variables'} variant={'dark'} className={'alert-enter'}>
+                    <AlertHeading>
+                        <i className={'bi-info-square-fill me-1'}/> Is this your server? Add some variables!
+                    </AlertHeading>
+                    Use sponsortext variables to add your website, Discord, TeamSpeak and other details to your server.
+                    For details, see the <AlertLink href={'/faq#adding-server-links'}>FAQ</AlertLink> or visit <AlertLink href={'https://sponsortext.cetteup.com/'} rel={'noreferrer'}>sponsortext.cetteup.com</AlertLink>.
+                </PersistedAlert>
+            }
             <ServerDetail initial={server}/>
         </>
     );

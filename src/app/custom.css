@@ -59,3 +59,24 @@ table tr.bot td {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-white-rgb), 0.5);
 }
+
+.alert-enter {
+    animation: alert-enter .5s ease-out both;
+}
+
+@keyframes alert-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alert-enter {
+        animation: none;
+    }
+}
