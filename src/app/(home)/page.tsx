@@ -1,5 +1,5 @@
 import { getQueryClient } from '@/lib/query';
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, noop } from '@tanstack/react-query';
 import { fetchServers } from '@/lib/fetch';
 import { ServerList } from '@/components/ServerList/ServerList';
 import type { Metadata } from 'next';
@@ -16,11 +16,13 @@ export const metadata: Metadata = {
 export default async function Home() {
     const queryClient = getQueryClient();
 
-    void queryClient.prefetchQuery({
-        queryKey: [ 'servers' ],
-        queryFn: fetchServers,
-        retry: 2,
-    });
+    await queryClient
+        .query({
+            queryKey: [ 'servers' ],
+            queryFn: fetchServers,
+            retry: 2,
+        })
+        .catch(noop);
 
     return (
         <>
