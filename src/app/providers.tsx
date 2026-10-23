@@ -2,7 +2,7 @@
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { getQueryClient } from '@/lib/query';
-import { BuddyListProvider } from '@/lib/localstorage';
+import { BuddyListProvider, DismissedAlertsProvider } from '@/lib/localstorage';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
     const queryClient = getQueryClient();
@@ -10,7 +10,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     return (
         <QueryClientProvider client={queryClient}>
             <BuddyListProvider>
-                {children}
+                <DismissedAlertsProvider>
+                    {children}
+                </DismissedAlertsProvider>
             </BuddyListProvider>
         </QueryClientProvider>
     );

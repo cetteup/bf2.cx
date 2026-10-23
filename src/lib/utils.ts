@@ -1,5 +1,9 @@
 import { Buddy, Player, Provider, Server } from '@/lib/types';
 
+export function isEmpty(value: object): boolean {
+    return Object.keys(value).length === 0;
+}
+
 export function formatProvider(provider: Provider): string {
     switch (provider) {
         case 'bf2hub.com':
