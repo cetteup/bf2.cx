@@ -3,7 +3,7 @@
 import { FC, useState } from 'react';
 import { Buddy } from '@/lib/types';
 import { useBuddyList } from '@/lib/localstorage';
-import { useHasMounted } from '@/lib/hooks';
+import { useHasMounted, useTracking } from '@/lib/hooks';
 
 type BuddyToggleProps = {
     pid: number
@@ -12,6 +12,8 @@ type BuddyToggleProps = {
 }
 
 export const BuddyToggle: FC<BuddyToggleProps> = ({ pid, name, tag }) => {
+    const { trackEvent } = useTracking();
+
     const { value: buddies, setValue: setBuddies } = useBuddyList();
     const [ hover, setHover ] = useState(false);
     const hasMounted = useHasMounted();
@@ -36,8 +38,10 @@ export const BuddyToggle: FC<BuddyToggleProps> = ({ pid, name, tag }) => {
             onClick={() => {
                 if (buddy) {
                     setBuddies(buddies.filter((b) => b.pid != pid && b.name != name));
+                    trackEvent('remove-buddy', { buddy: name });
                 } else {
                     setBuddies([ ...buddies, { pid, name, tag } ]);
+                    trackEvent('add-buddy', { buddy: name });
                 }
             }}
             onMouseEnter={() => {
