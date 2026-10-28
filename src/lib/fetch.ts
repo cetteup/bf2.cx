@@ -17,11 +17,7 @@ export const fetchServers = async (): Promise<Server[]> => {
             url.searchParams.set('after', after);
         }
 
-        const resp = await fetch(url, {
-            next: {
-                revalidate: 30,
-            },
-        });
+        const resp = await fetch(url, { cache: 'no-store' });
         const data = await resp.json() as {
             servers: Server[]
             cursor: string
