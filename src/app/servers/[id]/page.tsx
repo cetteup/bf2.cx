@@ -6,8 +6,6 @@ import { AlertHeading, AlertLink } from 'react-bootstrap';
 import { PersistedAlert } from '@/components/PersistedAlert';
 import { isEmpty } from '@/lib/utils';
 
-export const dynamic = 'force-dynamic';
-
 type Props = {
     params: Promise<{ id: string }>
 }
@@ -54,7 +52,7 @@ export default async function ServerPage({ params }: Props) {
                     For details, see the <AlertLink href={'/faq#adding-server-links'}>FAQ</AlertLink> or visit <AlertLink href={'https://sponsortext.cetteup.com/'} rel={'noreferrer'}>sponsortext.cetteup.com</AlertLink>.
                 </PersistedAlert>
             }
-            <ServerDetail initial={server}/>
+            <ServerDetail ip={ip} port={port} initial={server}/>
         </>
     );
 }
