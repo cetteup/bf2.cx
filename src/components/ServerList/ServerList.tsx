@@ -22,7 +22,9 @@ export const ServerList: FC = () => {
         refetchOnWindowFocus: true,
         refetchOnReconnect: true,
         retry: 2,
-        throwOnError: true,
+        // Only throw error if the query has no data, otherwise use previously cached data
+        // (mirrors error handling behavior of `useSuspenseQuery`)
+        throwOnError: (_, query) => query.state.data == undefined,
     });
 
     const servers = hasMounted ? data : undefined;
