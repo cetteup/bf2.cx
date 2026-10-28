@@ -15,16 +15,17 @@ import { useTracking } from '@/lib/hooks';
 import { ProviderIcon } from '@/components/ProviderIcon';
 
 type ServerDetailProps = {
+    ip: string
+    port: string
     initial: Server
 }
 
-export const ServerDetail: FC<ServerDetailProps> = ({ initial }) => {
+export const ServerDetail: FC<ServerDetailProps> = ({ ip, port, initial }) => {
     const { trackEvent } = useTracking();
 
-    const { ip, port } = initial;
     const { data: server } = useSuspenseQuery({
         queryKey: [ 'servers', ip, port ],
-        queryFn: () => fetchServer(ip, port.toString()),
+        queryFn: () => fetchServer(ip, port),
         initialData: initial,
         refetchInterval: 30000,
         refetchIntervalInBackground: false,
