@@ -15,6 +15,18 @@ export function formatProvider(provider: Provider): string {
     }
 }
 
+export function formatTeamLabel(gameVariant: string, teamLabel: string): string {
+    if (gameVariant == 'bfp2') {
+        if (teamLabel == 'ud') {
+            return 'Undead';
+        } else if (teamLabel == 'pl') {
+            return 'Peglegs';
+        }
+    }
+
+    return teamLabel
+}
+
 export function formatPlayerName(player: Player | Buddy): string {
     if (player.tag == '') {
         return player.name;

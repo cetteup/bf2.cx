@@ -1,18 +1,19 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
-import { buildPlayerProfileURL, formatPlayerName } from '@/lib/utils';
+import { buildPlayerProfileURL, formatPlayerName, formatTeamLabel } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
 import { BuddyToggle } from '@/components/BuddyToggle';
 import { useTracking } from '@/lib/hooks';
 
 type ServerDetailPlayerTableProps = {
+    gameVariant?: string
     team?: Team
     players?: Player[]
     isLoading?: boolean
 }
 
-export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team, players, isLoading }) => {
+export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ gameVariant, team, players, isLoading }) => {
     const { trackEvent } = useTracking();
 
     return (
@@ -20,7 +21,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ team
             <div className={'pe-auto my-2'}>
                 <h3 className={'text-center bg-dark-subtle py-3'}>
                     {isLoading && <Placeholder xs={2} size={'lg'}></Placeholder>}
-                    {team && team.label}
+                    {gameVariant && team && formatTeamLabel(gameVariant, team.label)}
                 </h3>
             </div>
             <Table variant={'dark'} hover responsive className={'align-middle'}>

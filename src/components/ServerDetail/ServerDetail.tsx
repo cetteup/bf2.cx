@@ -189,6 +189,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port, initial }) => {
                     {server.teams.map((t) => (
                         <Col key={t.index}>
                             <ServerDetailPlayerTable
+                                gameVariant={server.gameVariant}
                                 team={t}
                                 players={
                                     server.players
