@@ -3,7 +3,7 @@ import { Server } from '@/lib/types';
 export const fetchServers = async (): Promise<Server[]> => {
     let cursor, after: string | undefined;
     let hasMore: boolean;
-    const servers = [];
+    const servers: Server[] = [];
     do {
         const url = new URL(
             '/v2/bf2/servers',
@@ -17,7 +17,16 @@ export const fetchServers = async (): Promise<Server[]> => {
             url.searchParams.set('after', after);
         }
 
-        const resp = await fetch(url, { cache: 'no-store' });
+        const resp = await fetch(url, {
+            next: {
+                revalidate: 30,
+            },
+        });
+
+        if (!resp.ok) {
+            throw new Error(`Failed to fetch servers: ${resp.status} ${resp.statusText}`);
+        }
+
         const data = await resp.json() as {
             servers: Server[]
             cursor: string
