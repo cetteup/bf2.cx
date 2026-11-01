@@ -1,4 +1,5 @@
 import { Buddy, Player, Provider, Server } from '@/lib/types';
+import { Address4, Address6 } from 'ip-address';
 
 export function isEmpty(value: object): boolean {
     return Object.keys(value).length === 0;
@@ -59,7 +60,39 @@ export function isValidURL(value: string | null, ...protocols: string[]): boolea
         return false;
     }
 
+    // Reject URLs with special/dummy hostnames (would not be reachable from the public internet)
+    if ([
+        'localhost',
+        'example.com',
+    ].includes(url.hostname)) {
+        return false;
+    }
+
+    // Reject URLs with non-global IP addresses (would not be reachable from the public internet)
+    const [ isIPAddress, isGlobal ] = isGlobalIPAddress(url.hostname);
+    if (isIPAddress && !isGlobal) {
+        return false;
+    }
+
     return protocols.length == 0 || protocols.includes(url.protocol);
+}
+
+export function isGlobalIPAddress(value: string): [boolean, boolean] {
+    try {
+        const address = new Address4(value);
+        return [true, address.isGlobal()];
+    } catch {
+        // not an IPv4 address, ignore and continue
+    }
+
+    try {
+        const address = new Address6(value);
+        return [true, address.isGlobal()];
+    } catch {
+        // not an IPv6 address, ignore and continue
+    }
+
+    return [false, false];
 }
 
 export function isHumanPlayer(player: Player): boolean {
