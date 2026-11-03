@@ -96,7 +96,20 @@ export function isGlobalIPAddress(value: string): [boolean, boolean] {
 }
 
 export function isHumanPlayer(player: Player): boolean {
-    return !player.aibot && (player.score != 0 || player.kills > 0 || player.deaths > 0 || player.ping > 0);
+    // Exclude AI bots (used on coop servers)
+    if (player.aibot) {
+        return false;
+    }
+
+    // Exclude players without a valid pid (e.g. players that have not fully connected yet)
+    // (will cause a negligible number of false positives by matching players using local profiles on unranked servers)
+    if (player.pid <= 0) {
+        return false;
+    }
+
+    // Human players are expected to have a ping > 0 (once fully connected),
+    // or at least one of score/kills/deaths > 0
+    return player.ping > 0 || player.score != 0 || player.kills > 0 || player.deaths > 0;
 }
 
 const knownServers: { ip: string, provider: Provider }[] = [
