@@ -19,7 +19,7 @@ export const fetchServers = async (): Promise<Server[]> => {
 
         const resp = await fetch(url, {
             next: {
-                revalidate: 30,
+                revalidate: 15,
             },
         });
 
