@@ -17,11 +17,7 @@ export const fetchServers = async (): Promise<Server[]> => {
             url.searchParams.set('after', after);
         }
 
-        const resp = await fetch(url, {
-            next: {
-                revalidate: 15,
-            },
-        });
+        const resp = await fetch(url, { cache: 'no-store' });
 
         if (!resp.ok) {
             throw new Error(`Failed to fetch servers: ${resp.status} ${resp.statusText}`);
