@@ -95,6 +95,107 @@ export function isGlobalIPAddress(value: string): [boolean, boolean] {
     return [false, false];
 }
 
+// Weekend Warriors started using coop bots which are not marked as AIBots in the server query response
+// Bots are using valid BF2Hub accounts, the only way to reliably detect them is by their pid and name
+const knownBots = new Map<number, string>([
+    [4073414, 'Fizbane'],
+    [43378251, 'Kol.Kanada'],
+    [43437661, '3rD.GOA.GodFather'],
+    [43680492, 'Bro-Belgareth'],
+    [43725586, 'k1n6t1m'],
+    [43810485, 'w1nblows'],
+    [44034035, '404-masterblaster'],
+    [44062104, 'wax-wax-wax'],
+    [44475370, '3rd-EasyTarget'],
+    [44499677, 'Gri5u'],
+    [44515868, 'Zer0-Eagle'],
+    [44688903, 'Sna-SpecialistNL'],
+    [44893703, 'Pyr0fin'],
+    [44935407, '0megadawn'],
+    [45255746, 'oOparticleOo'],
+    [45382307, 'gil-ISRAELI-ARMY'],
+    [45401048, '9voltneville'],
+    [45641272, 'f4l.Crime'],
+    [47263041, 'D4r3D3vi1_BR'],
+    [47301309, 'ZeR0-IVIanCeR'],
+    [48073029, 'Gil-The-King'],
+    [48817384, 'Far-sight-xr20'],
+    [48994226, 'DEL-Alex'],
+    [49060719, 'YetAnotherMedic'],
+    [55582387, 'vic.chen'],
+    [57563614, 'n0vaa'],
+    [57639408, 'Mar-Mighty_Good'],
+    [57767783, 'Pug-Shoes'],
+    [58994910, 'quaadez'],
+    [59244501, 'FOG-Beowolf'],
+    [59575772, 'TAL-MASRI'],
+    [59965891, 'Jax-Vesper'],
+    [60175695, 'cra-Z-chick'],
+    [60395848, 'VIK-VICIOUS'],
+    [60859028, 'Tin-of-Spam'],
+    [61541365, 'SAF.RinseouT'],
+    [62585479, 'Axl.Apollo'],
+    [62961460, 'enza22'],
+    [63707594, '9VoltChiken'],
+    [64546830, 'Col-ASCII'],
+    [64763962, 'Mat-Montana'],
+    [64862853, 'min-dolppi'],
+    [65060948, 'axl.cap'],
+    [65512673, 'zig-zag2929'],
+    [66357354, 'vex.no.mind'],
+    [66514751, 'CAF-CapnCrunch'],
+    [66660223, 'CLo0uD'],
+    [67057602, 'nap-marine-sniper'],
+    [67845071, 'elt3hawk'],
+    [67858101, 'Uni-Sensei'],
+    [68172878, 'nil.desperandum'],
+    [68330636, 'B0n35haker'],
+    [69174452, 'MIN-RKO-RANDORTON'],
+    [69225702, 'Jam-Master-L'],
+    [69538026, 'sho-ryuu-reppaa'],
+    [70005839, 'B0n3.Bone'],
+    [70679238, 'CAC.Drunken'],
+    [76538546, 'tor.h.nilsen'],
+    [78013798, 'Jax00nz'],
+    [78499773, 'T0x1c_Av3ng3r'],
+    [78938797, 'MrT.Hagen'],
+    [83366309, 'HAL-MNKC'],
+    [85313864, 'sh4arkY'],
+    [85895779, 'DRE-estro'],
+    [87000635, 'p0c.HeavydutY'],
+    [90500100, 'NAP-Bullet'],
+    [92243584, 'Rat-er-taT'],
+    [98826237, 'Mol-La-Moule'],
+    [103470958, 'ron-israel-army'],
+    [108197331, 'blu-cartell'],
+    [111116870, 'SOU-KEN-BiTYA100'],
+    [111612015, 'sh4b0nice'],
+    [112658166, 'mrM4rcus'],
+    [117297948, 'pan-tratatata'],
+    [124765270, 'Tor-w-Hammer'],
+    [129467363, 'm0r1bund_z3r0'],
+    [147092475, 'Vic.Cebraham'],
+    [149342106, 'vik.casar'],
+    [151687273, 'MrP.NoOb'],
+    [156398787, 'Rat-issage'],
+    [173478338, 'Bro-Gangstaar'],
+    [184885774, 'Blu-RayCharles'],
+    [189268401, 'Sho.Leipzig'],
+    [192287649, 'Ech0_Phyb3r'],
+    [223725847, 'DrD0ct0r'],
+    [227638091, 'W0bie'],
+    [239799032, 'w1ldebeast'],
+    [254433328, '0MeckieMesser0'],
+    [290754821, 'LaZ0rGuN.'],
+    [295630425, 'Dre.Pepper'],
+    [334913627, 'und-ende'],
+    [457769629, 'Bol2_painT'],
+    [500071174, 'but2addicted2quit'],
+    [500182510, 'GostSoldier44'],
+    [500216503, 'LIT-RIGHT-NOW'],
+    [500603298, 'pokemelik'],
+]);
+
 export function isHumanPlayer(player: Player): boolean {
     // Exclude AI bots (used on coop servers)
     if (player.aibot) {
@@ -104,6 +205,11 @@ export function isHumanPlayer(player: Player): boolean {
     // Exclude players without a valid pid (e.g. players that have not fully connected yet)
     // (will cause a negligible number of false positives by matching players using local profiles on unranked servers)
     if (player.pid <= 0) {
+        return false;
+    }
+
+    // Exclude known bots
+    if (knownBots.get(player.pid) === player.name) {
         return false;
     }
 
