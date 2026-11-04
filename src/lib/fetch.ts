@@ -1,6 +1,7 @@
+import { unstable_cache } from 'next/cache';
 import { Server } from '@/lib/types';
 
-export const fetchServers = async (): Promise<Server[]> => {
+const fetchServersUncached = async (): Promise<Server[]> => {
     let cursor, after: string | undefined;
     let hasMore: boolean;
     const servers: Server[] = [];
@@ -42,8 +43,14 @@ export const fetchServers = async (): Promise<Server[]> => {
     return servers;
 };
 
+export const fetchServers = unstable_cache(
+    fetchServersUncached,
+    [ 'servers' ],
+    { revalidate: 30 },
+);
+
 export const fetchServer = async (ip: string, port: string): Promise<Server | undefined> => {
-    // Always fetch list and search within it to re-use cached API responses
+    // Resolve details from the cached, fully paginated server list.
     const servers = await fetchServers();
     return servers.find((s) => s.ip == ip && s.port.toString() == port);
 };
