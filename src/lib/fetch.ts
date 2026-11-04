@@ -50,23 +50,7 @@ export const fetchServers = unstable_cache(
 );
 
 export const fetchServer = async (ip: string, port: string): Promise<Server | undefined> => {
-    const url = new URL(
-        `/v2/bf2/servers/${encodeURIComponent(ip)}:${encodeURIComponent(port)}`,
-        'https://api.bflist.io',
-    );
-    const resp = await fetch(url, {
-        next: {
-            revalidate: 30,
-        },
-    });
-
-    if (resp.status === 404) {
-        return undefined;
-    }
-
-    if (!resp.ok) {
-        throw new Error(`Failed to fetch server ${ip}:${port}: ${resp.status} ${resp.statusText}`);
-    }
-
-    return await resp.json() as Server;
+    // Resolve details from the cached, fully paginated server list.
+    const servers = await fetchServers();
+    return servers.find((s) => s.ip == ip && s.port.toString() == port);
 };
