@@ -245,6 +245,11 @@ export function isHumanPlayer(player: Player): boolean {
         return false;
     }
 
+    // Exclude Gameppy AI bot PID range
+    if (player.pid >= 920000000 && player.pid < 930000000) {
+        return false;
+    }
+
     // Exclude known bots
     if (knownBots.get(player.pid) === player.name) {
         return false;
