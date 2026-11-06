@@ -95,9 +95,26 @@ export function isGlobalIPAddress(value: string): [boolean, boolean] {
     return [false, false];
 }
 
-// Weekend Warriors started using coop bots which are not marked as AIBots in the server query response
+export function isHumanPlayer(player: Player): boolean {
+    // Exclude players without a valid pid (e.g. players that have not fully connected yet)
+    // (will cause a negligible number of false positives by matching players using local profiles on unranked servers)
+    if (player.pid <= 0) {
+        return false;
+    }
+
+    // Exclude AI bots
+    if (isAIBot(player)) {
+        return false;
+    }
+
+    // Human players are expected to have a ping > 0 (once fully connected),
+    // or at least one of score/kills/deaths > 0
+    return player.ping > 0 || player.score != 0 || player.kills > 0 || player.deaths > 0;
+}
+
+// Weekend Warriors started using AI bots which are not marked as such in the server query response
 // Bots are using valid BF2Hub accounts, the only way to reliably detect them is by their pid and name
-const knownBots = new Map<number, string>([
+const knownAIBots = new Map<number, string>([
     [4073414, 'Fizbane'],
     [37019452, 'Cra-z-gurl'],
     [43378251, 'Kol.Kanada'],
@@ -233,31 +250,16 @@ const knownBots = new Map<number, string>([
     [500603298, 'pokemelik'],
 ]);
 
-export function isHumanPlayer(player: Player): boolean {
-    // Exclude AI bots (used on coop servers)
+export function isAIBot(player: Player): boolean {
     if (player.aibot) {
-        return false;
+        return true;
     }
 
-    // Exclude players without a valid pid (e.g. players that have not fully connected yet)
-    // (will cause a negligible number of false positives by matching players using local profiles on unranked servers)
-    if (player.pid <= 0) {
-        return false;
-    }
-
-    // Exclude Gameppy AI bot PID range
     if (player.pid >= 920000000 && player.pid < 930000000) {
-        return false;
+        return true;
     }
 
-    // Exclude known bots
-    if (knownBots.get(player.pid) === player.name) {
-        return false;
-    }
-
-    // Human players are expected to have a ping > 0 (once fully connected),
-    // or at least one of score/kills/deaths > 0
-    return player.ping > 0 || player.score != 0 || player.kills > 0 || player.deaths > 0;
+    return knownAIBots.get(player.pid) === player.name;
 }
 
 const knownServers: { ip: string, provider: Provider }[] = [

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
-import { buildPlayerProfileURL, formatPlayerName, formatTeamLabel } from '@/lib/utils';
+import { buildPlayerProfileURL, formatPlayerName, formatTeamLabel, isAIBot } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
 import { BuddyToggle } from '@/components/BuddyToggle';
 import { useTracking } from '@/lib/hooks';
@@ -50,22 +50,21 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                 {players && players.map((p, i) => {
                     // Show a stream platform link if player is known streamer (and currently [likely to be] live)
                     const streamer = getActiveStreamerByPlayer(p);
+                    const bot = isAIBot(p);
                     return (
-                        <tr key={i} className={'align-middle ' + (!p.aibot ? 'player' : 'bot')}>
+                        <tr key={i} className={'align-middle ' + (bot ? 'bot' : 'player')}>
                             <td align={'right'}>{i + 1}</td>
                             <td>
-                                {!p.aibot && p.pid > 0 ? (
+                                {!bot ? (
                                     <a href={buildPlayerProfileURL(p)}
                                        className={'text-white text-decoration-none'}>
                                         {formatPlayerName(p)}
                                     </a>
                                 ) : (
                                     <>
-                                        {p.aibot && (
-                                            <span className={'me-1'}>
-                                                <i className={'bi-pc-display align-middle'} title={'Coop-bot'}/>
-                                            </span>
-                                        )}
+                                        <span className={'me-1'}>
+                                            <i className={'bi-pc-display align-middle'} title={'Coop-bot'}/>
+                                        </span>
                                         {formatPlayerName(p)}
                                     </>
                                 )}
@@ -85,7 +84,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                                     </a>
                                 </span>
                                 )}
-                                {!p.aibot && (
+                                {!bot && (
                                     <span className={'ms-1'}>
                                     <BuddyToggle pid={p.pid} name={p.name} tag={p.tag}/>
                                 </span>
@@ -94,6 +93,10 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                             <td align={'right'}>{p.score}</td>
                             <td align={'right'}>{p.kills}</td>
                             <td align={'right'}>{p.deaths}</td>
+                            {/*
+                                Show any non-zero ping for bogus AI bots (isAIBot == true but p.aibot == false).
+                                These bots do have real pings it allows users to tell true from bogus AI bots.
+                            */}
                             <td align={'right'}>{p.ping == 0 || p.aibot ? '-' : p.ping + 'ms'}</td>
                         </tr>
                     );
