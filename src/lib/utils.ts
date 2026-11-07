@@ -154,6 +154,7 @@ const knownAIBots = new Map<number, string>([
     [46321439, 'MrM0rePhun'],
     [46393218, 'mrk.playerZ'],
     [46831899, 'R0addevil'],
+    [47112608, 'Sur.Smokes.Alot'],
     [47263041, 'D4r3D3vi1_BR'],
     [47301309, 'ZeR0-IVIanCeR'],
     [47696182, 'FizbaNDHR'],
