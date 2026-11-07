@@ -130,6 +130,7 @@ const knownAIBots = new Map<number, string>([
     [44038832, 'tok-D-pipe'],
     [44062104, 'wax-wax-wax'],
     [44475370, '3rd-EasyTarget'],
+    [44492818, 'R3d-Rogu3'],
     [44499677, 'Gri5u'],
     [44515868, 'Zer0-Eagle'],
     [44624729, 'Sal-Chichon'],
