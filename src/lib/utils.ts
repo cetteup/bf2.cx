@@ -230,6 +230,7 @@ const knownAIBots = new Map<number, string>([
     [70861613, 'Pyr0glyph'],
     [70967035, 't0x1city'],
     [72517719, 'Nor-Hazardous'],
+    [72659975, 'cin-die'],
     [73953365, 'h0taspho'],
     [75676874, 'joa-neo'],
     [76508680, 'Cin.nx'],
@@ -310,6 +311,7 @@ const knownAIBots = new Map<number, string>([
     [500193592, 'elt3rco'],
     [500216503, 'LIT-RIGHT-NOW'],
     [500225869, 'W1nCod'],
+    [500573355, 'KanePropane'],
     [500603298, 'pokemelik'],
     [500608139, 'JaySilverheels'],
 ]);
