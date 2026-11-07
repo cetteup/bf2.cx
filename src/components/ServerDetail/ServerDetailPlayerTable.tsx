@@ -47,7 +47,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                         ))}
                     </tr>
                 ))}
-                {players && players.map((p, i) => {
+                {players && players.sort(compare).map((p, i) => {
                     // Show a stream platform link if player is known streamer (and currently [likely to be] live)
                     const streamer = getActiveStreamerByPlayer(p);
                     const bot = isAIBot(p);
@@ -106,3 +106,8 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
         </>
     );
 };
+
+const compare = (a: Player, b: Player) => {
+    // Sort by score DESC, then kills DESC, then deaths ASC and finally by name ASC
+    return b.score - a.score || b.kills - a.kills || a.deaths - b.deaths || a.name.localeCompare(b.name);
+}
