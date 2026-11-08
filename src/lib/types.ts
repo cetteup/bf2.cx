@@ -40,6 +40,7 @@ export type Player = {
     team: number
     teamLabel: string
     aibot: boolean
+    kind: 'human' | 'aibot' | 'bot' | 'seeder' | 'unknown'
 }
 
 export type Buddy = Pick<Player, 'pid' | 'name' | 'tag'>

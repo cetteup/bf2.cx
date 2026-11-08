@@ -50,12 +50,11 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                 {players && players.sort(compare).map((p, i) => {
                     // Show a stream platform link if player is known streamer (and currently [likely to be] live)
                     const streamer = getActiveStreamerByPlayer(p);
-                    const bot = isAIBot(p);
                     return (
-                        <tr key={i} className={'align-middle ' + (bot ? 'bot' : 'player')}>
+                        <tr key={i} className={'align-middle ' + (isAIBot(p) ? 'bot' : 'player')}>
                             <td align={'right'}>{i + 1}</td>
                             <td>
-                                {!bot ? (
+                                {!isAIBot(p) ? (
                                     <a href={buildPlayerProfileURL(p)}
                                        className={'text-white text-decoration-none'}>
                                         {formatPlayerName(p)}
@@ -84,7 +83,7 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                                     </a>
                                 </span>
                                 )}
-                                {!bot && (
+                                {!isAIBot(p) && (
                                     <span className={'ms-1'}>
                                     <BuddyToggle pid={p.pid} name={p.name} tag={p.tag}/>
                                 </span>
