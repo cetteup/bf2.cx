@@ -229,6 +229,7 @@ const knownAIBots = new Map<number, string>([
     [70679238, 'CAC.Drunken'],
     [70861613, 'Pyr0glyph'],
     [70967035, 't0x1city'],
+    [71488778, 'Ech0ofSan1ty'],
     [72517719, 'Nor-Hazardous'],
     [72659975, 'cin-die'],
     [73953365, 'h0taspho'],
@@ -287,6 +288,7 @@ const knownAIBots = new Map<number, string>([
     [187692834, 'mar-nav'],
     [189268401, 'Sho.Leipzig'],
     [192287649, 'Ech0_Phyb3r'],
+    [198997909, 'nem.stueck.Blei'],
     [217668409, 'Pan-Maxx-2'],
     [218883807, 'Hay-From-Hell'],
     [219650056, 'Fla-Soldier'],
@@ -311,7 +313,6 @@ const knownAIBots = new Map<number, string>([
     [500193592, 'elt3rco'],
     [500216503, 'LIT-RIGHT-NOW'],
     [500225869, 'W1nCod'],
-    [500573355, 'KanePropane'],
     [500603298, 'pokemelik'],
     [500608139, 'JaySilverheels'],
 ]);
