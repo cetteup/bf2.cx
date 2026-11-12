@@ -105,6 +105,10 @@ export function isAIBot(player: Player): boolean {
     return player.kind == 'aibot' || player.kind == 'bot';
 }
 
+export function isSpectator(player: Player): boolean {
+    return player.kind == 'spectator';
+}
+
 const knownServers: { ip: string, provider: Provider }[] = [
     { ip: '185.107.96.22', provider: 'bf2hub.com' }, // 2F4Y
     { ip: '141.94.204.21', provider: 'bf2hub.com' }, // SUPER@

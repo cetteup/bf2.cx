@@ -5,7 +5,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchServer } from '@/lib/fetch';
 import { Badge, Col, Container, Row } from 'react-bootstrap';
 import { ServerDetailPlayerTable } from '@/components/ServerDetail/ServerDetailPlayerTable';
-import { determineProvider, isAIBot, isHumanPlayer, isValidURL } from '@/lib/utils';
+import { determineProvider, isAIBot, isHumanPlayer, isSpectator, isValidURL } from '@/lib/utils';
 import Image from 'next/image';
 import { SettingToggle } from '@/components/ServerDetail/SettingToggle';
 import { Server } from '@/lib/types';
@@ -193,7 +193,7 @@ export const ServerDetail: FC<ServerDetailProps> = ({ ip, port, initial }) => {
                                 team={t}
                                 players={
                                     server.players
-                                        .filter((p) => (isHumanPlayer(p) || isAIBot(p)) && p.team == t.index)
+                                        .filter((p) => (isHumanPlayer(p) || isAIBot(p) || isSpectator(p)) && p.team == t.index)
                                 }
                             />
                         </Col>

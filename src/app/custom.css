@@ -55,9 +55,16 @@ i.buddy-active:hover {
     transition: color .3s;
 }
 
-table tr.bot td {
+table tr.player td, table tr.player td a {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), 1);
+    text-decoration: none;
+}
+
+table tr.bot td, table tr.bot td a {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-white-rgb), 0.5);
+    text-decoration: none;
 }
 
 .alert-enter {

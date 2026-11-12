@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Player, Team } from '@/lib/types';
 import { Placeholder, Table } from 'react-bootstrap';
-import { buildPlayerProfileURL, formatPlayerName, formatTeamLabel, isAIBot } from '@/lib/utils';
+import { buildPlayerProfileURL, formatPlayerName, formatTeamLabel, isAIBot, isSpectator } from '@/lib/utils';
 import { getActiveStreamerByPlayer } from '@/lib/streamers';
 import { BuddyToggle } from '@/components/BuddyToggle';
 import { useTracking } from '@/lib/hooks';
@@ -51,14 +51,20 @@ export const ServerDetailPlayerTable: FC<ServerDetailPlayerTableProps> = ({ game
                     // Show a stream platform link if player is known streamer (and currently [likely to be] live)
                     const streamer = getActiveStreamerByPlayer(p);
                     return (
-                        <tr key={i} className={'align-middle ' + (isAIBot(p) ? 'bot' : 'player')}>
+                        <tr key={i} className={'align-middle ' + (isAIBot(p) || isSpectator(p) ? 'bot' : 'player')}>
                             <td align={'right'}>{i + 1}</td>
                             <td>
                                 {!isAIBot(p) ? (
-                                    <a href={buildPlayerProfileURL(p)}
-                                       className={'text-white text-decoration-none'}>
-                                        {formatPlayerName(p)}
-                                    </a>
+                                    <>
+                                        {isSpectator(p) && (
+                                            <span className={'me-1'}>
+                                                <i className={'bi-eye align-middle'} title={'Spectator'}/>
+                                            </span>
+                                        )}
+                                        <a href={buildPlayerProfileURL(p)}>
+                                            {formatPlayerName(p)}
+                                        </a>
+                                    </>
                                 ) : (
                                     <>
                                         <span className={'me-1'}>
